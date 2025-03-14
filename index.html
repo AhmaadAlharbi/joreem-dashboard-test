@@ -1,0 +1,3325 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>لوحة تحكم متجر جوريم | أبواب الصيانة</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Tajawal", sans-serif;
+      }
+
+      :root {
+        --primary-color: #2563eb;
+        --primary-light: #93c5fd;
+        --primary-dark: #1d4ed8;
+        --primary-bg: #eff6ff;
+
+        --secondary-color: #9333ea;
+        --secondary-light: #d8b4fe;
+        --secondary-dark: #7e22ce;
+
+        --accent-color: #ec4899;
+        --accent-light: #fbcfe8;
+
+        --success-color: #10b981;
+        --success-light: #a7f3d0;
+
+        --warning-color: #f59e0b;
+        --warning-light: #fde68a;
+
+        --danger-color: #ef4444;
+        --danger-light: #fecaca;
+
+        --info-color: #0ea5e9;
+        --info-light: #bae6fd;
+
+        --text-color: #1e293b;
+        --text-light: #64748b;
+        --text-xlight: #94a3b8;
+
+        --bg-color: #f8fafc;
+        --bg-light: #ffffff;
+        --bg-dark: #f1f5f9;
+
+        --border-color: #e2e8f0;
+        --border-dark: #cbd5e1;
+
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+        --radius-sm: 0.25rem;
+        --radius: 0.5rem;
+        --radius-md: 0.75rem;
+        --radius-lg: 1rem;
+
+        --transition: all 0.3s ease;
+        --transition-slow: all 0.5s ease;
+
+        /* Font sizes - تحسين للتجاوب */
+        --fs-xxs: 0.7rem; /* 11.2px */
+        --fs-xs: 0.75rem; /* 12px */
+        --fs-sm: 0.875rem; /* 14px */
+        --fs-base: 1rem; /* 16px */
+        --fs-md: 1.125rem; /* 18px */
+        --fs-lg: 1.25rem; /* 20px */
+        --fs-xl: 1.5rem; /* 24px */
+        --fs-2xl: 1.75rem; /* 28px */
+
+        /* Spacings - تحسين للتجاوب */
+        --space-1: 0.25rem;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.25rem;
+        --space-6: 1.5rem;
+        --space-8: 2rem;
+        --space-10: 2.5rem;
+        --space-12: 3rem;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--bg-dark);
+        border-radius: var(--radius);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--primary-light);
+        border-radius: var(--radius);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-color);
+      }
+
+      /* Layout */
+      .dashboard {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        background: var(--bg-light);
+        border-left: 1px solid var(--border-color);
+        padding: var(--space-6) 0;
+        position: fixed;
+        width: 280px;
+        height: 100vh;
+        overflow-y: auto;
+        z-index: 50;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease;
+      }
+
+      .logo-container {
+        padding: 0 var(--space-6) var(--space-6);
+        margin-bottom: var(--space-4);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .logo-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: var(--fs-xl);
+        box-shadow: var(--shadow-md);
+      }
+
+      .logo-text {
+        font-size: var(--fs-xl);
+        font-weight: 700;
+        color: var(--text-color);
+      }
+
+      .logo-text span {
+        font-weight: 300;
+        color: var(--primary-color);
+      }
+
+      .sidebar-section {
+        margin-top: var(--space-8);
+        padding: 0 var(--space-6);
+      }
+
+      .sidebar-section-title {
+        font-size: var(--fs-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-light);
+        margin-bottom: var(--space-3);
+        padding-right: var(--space-2);
+      }
+
+      .menu {
+        list-style: none;
+      }
+
+      .menu-item {
+        margin-bottom: var(--space-2);
+      }
+
+      .menu-link {
+        display: flex;
+        align-items: center;
+        padding: var(--space-3);
+        color: var(--text-color);
+        text-decoration: none;
+        border-radius: var(--radius);
+        transition: var(--transition);
+        font-weight: 500;
+        gap: 0.75rem;
+      }
+
+      .menu-link:hover {
+        background-color: var(--primary-bg);
+        color: var(--primary-color);
+        transform: translateX(-4px);
+      }
+
+      .menu-link.active {
+        background-color: var(--primary-bg);
+        color: var(--primary-color);
+        font-weight: 600;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .menu-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.75rem;
+        font-size: var(--fs-md);
+      }
+
+      /* Main Content */
+      .main-content {
+        grid-column: 2;
+        padding: var(--space-6);
+        transition: var(--transition);
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-8);
+        padding-bottom: var(--space-4);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .page-title {
+        font-size: var(--fs-2xl);
+        font-weight: 700;
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .page-title-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: var(--primary-bg);
+        color: var(--primary-color);
+        border-radius: var(--radius);
+        font-size: var(--fs-lg);
+      }
+
+      /* User Profile */
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--space-4);
+      }
+
+      .notification-button {
+        position: relative;
+        background: var(--bg-light);
+        border: 1px solid var(--border-color);
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .notification-button:hover {
+        background: var(--primary-bg);
+        color: var(--primary-color);
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 18px;
+        height: 18px;
+        background-color: var(--danger-color);
+        color: white;
+        border-radius: 50%;
+        font-size: var(--fs-xxs);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+
+      .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background-color: var(--bg-light);
+        border: 1px solid var(--border-color);
+        padding: var(--space-2) var(--space-3);
+        border-radius: var(--radius);
+        transition: var(--transition);
+        cursor: pointer;
+      }
+
+      .user-profile:hover {
+        box-shadow: var(--shadow);
+        border-color: var(--primary-light);
+      }
+
+      .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: var(--fs-base);
+      }
+
+      .user-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .user-name {
+        font-weight: 600;
+        font-size: var(--fs-sm);
+        color: var(--text-color);
+      }
+
+      .user-role {
+        font-size: var(--fs-xs);
+        color: var(--text-light);
+      }
+
+      /* Dashboard Metrics */
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--space-6);
+        margin-bottom: var(--space-8);
+      }
+
+      .metric-card {
+        background-color: var(--bg-light);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        padding: var(--space-6);
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .metric-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary-light);
+      }
+
+      .metric-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 4px;
+        width: 100%;
+        background: linear-gradient(
+          to left,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+      }
+
+      .metric-card:nth-child(1)::before {
+        background: linear-gradient(
+          to left,
+          var(--primary-color),
+          var(--primary-dark)
+        );
+      }
+
+      .metric-card:nth-child(2)::before {
+        background: linear-gradient(
+          to left,
+          var(--success-color),
+          var(--info-color)
+        );
+      }
+
+      .metric-card:nth-child(3)::before {
+        background: linear-gradient(
+          to left,
+          var(--accent-color),
+          var(--secondary-color)
+        );
+      }
+
+      .metric-card:nth-child(4)::before {
+        background: linear-gradient(
+          to left,
+          var(--warning-color),
+          var(--danger-color)
+        );
+      }
+
+      .metric-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: var(--space-4);
+      }
+
+      .metric-title {
+        font-size: var(--fs-sm);
+        color: var(--text-light);
+        font-weight: 500;
+      }
+
+      .metric-icon {
+        height: 42px;
+        width: 42px;
+        border-radius: var(--radius);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--fs-xl);
+      }
+
+      .metric-card:nth-child(1) .metric-icon {
+        background-color: var(--primary-bg);
+        color: var(--primary-color);
+      }
+
+      .metric-card:nth-child(2) .metric-icon {
+        background-color: rgba(16, 185, 129, 0.1);
+        color: var(--success-color);
+      }
+
+      .metric-card:nth-child(3) .metric-icon {
+        background-color: rgba(236, 72, 153, 0.1);
+        color: var(--accent-color);
+      }
+
+      .metric-card:nth-child(4) .metric-icon {
+        background-color: rgba(245, 158, 11, 0.1);
+        color: var(--warning-color);
+      }
+
+      .metric-content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .metric-value {
+        font-size: var(--fs-2xl);
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: var(--space-2);
+      }
+
+      .metric-subtitle {
+        font-size: var(--fs-xs);
+        color: var(--text-light);
+      }
+
+      .metric-change {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: var(--fs-xs);
+        margin-top: var(--space-2);
+      }
+
+      .metric-change.positive {
+        color: var(--success-color);
+      }
+
+      .metric-change.negative {
+        color: var(--danger-color);
+      }
+
+      /* Charts Section */
+      .charts-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: var(--space-6);
+        margin-bottom: var(--space-8);
+      }
+
+      .chart-card {
+        background-color: var(--bg-light);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        overflow: hidden;
+      }
+
+      .chart-card:hover {
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary-light);
+      }
+
+      .chart-header {
+        padding: var(--space-5);
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .chart-title {
+        font-size: var(--fs-md);
+        font-weight: 600;
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .chart-title-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
+      }
+
+      .chart-content {
+        padding: var(--space-5);
+        min-height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .chart-placeholder {
+        width: 100%;
+        height: 250px;
+        background-color: var(--bg-dark);
+        border-radius: var(--radius);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-light);
+        font-style: italic;
+      }
+
+      /* Top Products Section */
+      .top-products {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .product-list {
+        padding: var(--space-2) 0;
+      }
+
+      .product-item {
+        display: flex;
+        align-items: center;
+        padding: var(--space-3) var(--space-5);
+        border-bottom: 1px solid var(--border-color);
+        transition: var(--transition);
+      }
+
+      .product-item:last-child {
+        border-bottom: none;
+      }
+
+      .product-item:hover {
+        background-color: var(--bg-dark);
+      }
+
+      .product-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-left: var(--space-4);
+      }
+
+      .product-color-1 {
+        background-color: var(--primary-color);
+      }
+
+      .product-color-2 {
+        background-color: var(--success-color);
+      }
+
+      .product-color-3 {
+        background-color: var(--warning-color);
+      }
+
+      .product-color-4 {
+        background-color: var(--danger-color);
+      }
+
+      .product-color-5 {
+        background-color: var(--info-color);
+      }
+
+      .product-info {
+        flex-grow: 1;
+      }
+
+      .product-name {
+        font-size: var(--fs-sm);
+        font-weight: 500;
+        margin-bottom: var(--space-1);
+      }
+
+      .product-size {
+        font-size: var(--fs-xs);
+        color: var(--text-light);
+      }
+
+      .product-sales {
+        font-weight: 600;
+        font-size: var(--fs-base);
+        color: var(--text-color);
+      }
+
+      /* Table Sections */
+      .table-section {
+        background-color: var(--bg-light);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow);
+        margin-bottom: var(--space-8);
+        overflow: hidden;
+        transition: var(--transition);
+      }
+
+      .table-section:hover {
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary-light);
+      }
+
+      .section-header {
+        padding: var(--space-5);
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .section-title {
+        font-size: var(--fs-md);
+        font-weight: 600;
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .section-title-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
+      }
+
+      .section-actions {
+        display: flex;
+        gap: var(--space-3);
+        flex-wrap: wrap;
+      }
+
+      .section-content {
+        overflow-x: auto;
+      }
+
+      /* Data Tables */
+      .data-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+
+      .data-table th,
+      .data-table td {
+        padding: var(--space-4) var(--space-5);
+        text-align: right;
+      }
+
+      .data-table th {
+        background-color: var(--bg-dark);
+        font-weight: 600;
+        color: var(--text-color);
+        white-space: nowrap;
+        position: sticky;
+        top: 0;
+      }
+
+      .data-table tbody tr {
+        border-bottom: 1px solid var(--border-color);
+        transition: var(--transition);
+      }
+
+      .data-table tbody tr:last-child {
+        border-bottom: none;
+      }
+
+      .data-table tbody tr:hover {
+        background-color: var(--bg-dark);
+      }
+
+      /* Mobile Card View for Tables */
+      .card-view-item {
+        display: none;
+        background-color: var(--bg-light);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        padding: var(--space-4);
+        margin-bottom: var(--space-3);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .card-view-row {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space-2) 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .card-view-row:last-child {
+        border-bottom: none;
+      }
+
+      .card-view-label {
+        font-weight: 600;
+        color: var(--text-light);
+      }
+
+      .card-view-value {
+        text-align: left;
+      }
+
+      .card-view-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--space-2);
+        margin-top: var(--space-3);
+      }
+
+      /* Badges and Buttons */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.35rem 0.75rem;
+        border-radius: 30px;
+        font-size: var(--fs-xs);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .badge-success {
+        background-color: var(--success-light);
+        color: var(--success-color);
+      }
+
+      .badge-warning {
+        background-color: var(--warning-light);
+        color: var(--warning-color);
+      }
+
+      .badge-danger {
+        background-color: var(--danger-light);
+        color: var(--danger-color);
+      }
+
+      .badge-info {
+        background-color: var(--info-light);
+        color: var(--info-color);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.6rem 1.25rem;
+        font-size: var(--fs-sm);
+        font-weight: 500;
+        border-radius: var(--radius);
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        gap: 0.5rem;
+        white-space: nowrap;
+        min-height: 42px; /* تأكد من أن الأزرار كبيرة بما يكفي للأجهزة اللمسية */
+      }
+
+      .btn-sm {
+        padding: 0.4rem 0.85rem;
+        font-size: var(--fs-xs);
+        min-height: 34px;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+      }
+
+      .btn-success {
+        background-color: var(--success-color);
+        color: white;
+      }
+
+      .btn-success:hover {
+        background-color: #0ca678;
+        transform: translateY(-2px);
+      }
+
+      .btn-danger {
+        background-color: var(--danger-color);
+        color: white;
+      }
+
+      .btn-danger:hover {
+        background-color: #e11d48;
+        transform: translateY(-2px);
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 1px solid var(--border-dark);
+        color: var(--text-color);
+      }
+
+      .btn-outline:hover {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        background-color: var(--primary-bg);
+        transform: translateY(-2px);
+      }
+
+      /* Inventory Status */
+      .inventory-status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .stock-indicator {
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+      }
+
+      .stock-high {
+        background-color: var(--success-color);
+      }
+
+      .stock-medium {
+        background-color: var(--warning-color);
+      }
+
+      .stock-low {
+        background-color: var(--danger-color);
+      }
+
+      /* Mobile Menu */
+      .mobile-header {
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-4);
+        background-color: var(--bg-light);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 40;
+      }
+
+      .mobile-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .mobile-logo-icon {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: var(--fs-lg);
+      }
+
+      .mobile-logo-text {
+        font-size: var(--fs-lg);
+        font-weight: 700;
+        color: var(--text-color);
+      }
+
+      .menu-toggle {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius);
+        background-color: var(--bg-light);
+        border: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--text-color);
+        font-size: var(--fs-lg);
+      }
+
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 45;
+        transition: var(--transition);
+        opacity: 0;
+      }
+
+      .sidebar-overlay.active {
+        opacity: 1;
+      }
+
+      /* Tab content transitions */
+      .tab-content {
+        display: none;
+        animation: fadeIn 0.3s ease forwards;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Animation for page transitions */
+      .page-transition {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        z-index: 60;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .page-transition.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .transition-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--primary-light);
+        border-top-color: var(--primary-color);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Form Elements */
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--space-6);
+      }
+
+      .form-group {
+        margin-bottom: var(--space-6);
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: var(--space-2);
+        font-weight: 500;
+        color: var(--text-color);
+      }
+
+      .form-control {
+        width: 100%;
+        padding: var(--space-3) var(--space-4);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        background-color: var(--bg-light);
+        color: var(--text-color);
+        font-size: var(--fs-base);
+        min-height: 46px; /* تأكد من أن حقول النموذج كبيرة بما يكفي للأجهزة اللمسية */
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      .form-actions {
+        display: flex;
+        gap: var(--space-4);
+        margin-top: var(--space-8);
+      }
+
+      /* Responsive Design - تحسينات للتجاوب */
+      /* Extra Large Screens */
+      @media (min-width: 1440px) {
+        .main-content {
+          padding: var(--space-8);
+        }
+
+        .metrics-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      /* Large Desktops */
+      @media (max-width: 1280px) {
+        .metrics-grid {
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+      }
+
+      /* Laptops and Small Desktops */
+      @media (max-width: 1200px) {
+        .charts-container {
+          grid-template-columns: 1fr;
+        }
+
+        .charts-container > .chart-card:nth-child(2) {
+          height: auto;
+        }
+      }
+
+      /* Tablets */
+      @media (max-width: 1024px) {
+        .dashboard {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          transform: translateX(100%);
+          z-index: 100;
+          width: 260px;
+        }
+
+        .sidebar.active {
+          transform: translateX(0);
+          box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content {
+          grid-column: 1;
+          padding: var(--space-4);
+          margin-right: 0;
+        }
+
+        .mobile-header {
+          display: flex;
+        }
+
+        .header {
+          display: none;
+        }
+
+        .sidebar-overlay {
+          display: block;
+        }
+
+        .metric-value {
+          font-size: var(--fs-xl);
+        }
+      }
+
+      /* Small Tablets */
+      @media (max-width: 768px) {
+        .metrics-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--space-4);
+        }
+
+        .page-title {
+          font-size: var(--fs-xl);
+        }
+
+        .section-header {
+          flex-wrap: wrap;
+          gap: var(--space-3);
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .form-actions {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .form-actions .btn {
+          width: 100%;
+        }
+
+        /* Show card view for tables on smaller screens */
+        .data-table {
+          display: none;
+        }
+
+        .card-view-item {
+          display: block;
+        }
+      }
+
+      /* Large Mobile Phones */
+      @media (max-width: 576px) {
+        .metrics-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--space-4);
+        }
+
+        .section-actions {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .section-title {
+          font-size: var(--fs-base);
+        }
+
+        .chart-title {
+          font-size: var(--fs-base);
+        }
+
+        .mobile-logo-text {
+          font-size: var(--fs-md);
+        }
+
+        .sidebar {
+          width: 85%;
+          max-width: 280px;
+        }
+      }
+
+      /* Small Mobile Phones */
+      @media (max-width: 375px) {
+        .main-content {
+          padding: var(--space-3);
+        }
+
+        .section-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .section-actions .btn {
+          width: 100%;
+        }
+
+        .page-title-icon {
+          width: 32px;
+          height: 32px;
+          font-size: var(--fs-base);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Bar -->
+    <div
+      id="loading-bar"
+      style="
+        height: 3px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--accent-color),
+          var(--primary-color)
+        );
+        background-size: 200% 100%;
+        animation: moveGradient 2s linear infinite;
+        z-index: 1000;
+        display: none;
+      "
+    ></div>
+
+    <!-- Page Transition Effect -->
+    <div class="page-transition" id="page-transition">
+      <div class="transition-spinner"></div>
+    </div>
+
+    <div class="dashboard">
+      <!-- Mobile Header -->
+      <header class="mobile-header">
+        <div class="mobile-logo">
+          <div class="mobile-logo-icon">ج</div>
+          <div class="mobile-logo-text">متجر جوريم</div>
+        </div>
+        <button class="menu-toggle" id="menu-toggle" aria-label="القائمة">
+          <i class="fas fa-bars"></i>
+        </button>
+      </header>
+
+      <!-- Sidebar Overlay -->
+      <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="logo-container">
+          <div class="logo">
+            <div class="logo-icon">ج</div>
+            <h1 class="logo-text">متجر <span>جوريم</span></h1>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h5 class="sidebar-section-title">القائمة الرئيسية</h5>
+          <ul class="menu">
+            <li class="menu-item">
+              <a
+                href="#dashboard"
+                class="menu-link active"
+                data-tab="dashboard"
+              >
+                <span class="menu-icon"><i class="fas fa-home"></i></span>
+                <span>لوحة القيادة</span>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="#orders" class="menu-link" data-tab="orders">
+                <span class="menu-icon"
+                  ><i class="fas fa-shopping-cart"></i
+                ></span>
+                <span>الطلبات</span>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="#products" class="menu-link" data-tab="products">
+                <span class="menu-icon"><i class="fas fa-door-open"></i></span>
+                <span>المنتجات</span>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="#inventory" class="menu-link" data-tab="inventory">
+                <span class="menu-icon"><i class="fas fa-boxes"></i></span>
+                <span>المخزون</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <h5 class="sidebar-section-title">إدارة</h5>
+          <ul class="menu">
+            <li class="menu-item">
+              <a href="#customers" class="menu-link" data-tab="customers">
+                <span class="menu-icon"><i class="fas fa-users"></i></span>
+                <span>العملاء</span>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="#users" class="menu-link" data-tab="users">
+                <span class="menu-icon"
+                  ><i class="fas fa-user-shield"></i
+                ></span>
+                <span>المستخدمين</span>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="#reports" class="menu-link" data-tab="reports">
+                <span class="menu-icon"><i class="fas fa-chart-line"></i></span>
+                <span>التقارير</span>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="#settings" class="menu-link" data-tab="settings">
+                <span class="menu-icon"><i class="fas fa-cog"></i></span>
+                <span>الإعدادات</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content" id="main-content">
+        <header class="header">
+          <h1 class="page-title">
+            <span class="page-title-icon"><i class="fas fa-home"></i></span>
+            <span id="current-page-title">لوحة القيادة</span>
+          </h1>
+          <div class="header-actions">
+            <button class="notification-button" aria-label="الإشعارات">
+              <i class="fas fa-bell"></i>
+              <span class="notification-badge">3</span>
+            </button>
+            <div class="user-profile">
+              <div class="avatar">م</div>
+              <div class="user-info">
+                <div class="user-name">محمد الحربي</div>
+                <div class="user-role">مدير النظام</div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="tab-content active" id="dashboard-tab">
+          <!-- Metrics -->
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">إجمالي المبيعات</div>
+                <div class="metric-icon">
+                  <i class="fas fa-money-bill-wave"></i>
+                </div>
+              </div>
+              <div class="metric-content">
+                <div class="metric-value">21,430 د.ك</div>
+                <div class="metric-subtitle">الشهر الحالي</div>
+                <div class="metric-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  <span>5.3% منذ الشهر الماضي</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">عدد الطلبات</div>
+                <div class="metric-icon">
+                  <i class="fas fa-shopping-bag"></i>
+                </div>
+              </div>
+              <div class="metric-content">
+                <div class="metric-value">178</div>
+                <div class="metric-subtitle">الشهر الحالي</div>
+                <div class="metric-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  <span>8.5% منذ الشهر الماضي</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">إجمالي الأبواب المباعة</div>
+                <div class="metric-icon">
+                  <i class="fas fa-door-open"></i>
+                </div>
+              </div>
+              <div class="metric-content">
+                <div class="metric-value">386</div>
+                <div class="metric-subtitle">الشهر الحالي</div>
+                <div class="metric-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  <span>42 باب أكثر من الشهر الماضي</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">المنتجات منخفضة المخزون</div>
+                <div class="metric-icon">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </div>
+              </div>
+              <div class="metric-content">
+                <div class="metric-value">7</div>
+                <div class="metric-subtitle">تحتاج لإعادة الطلب</div>
+                <div class="metric-change negative">
+                  <i class="fas fa-arrow-up"></i>
+                  <span>2 منتجات أكثر من الشهر الماضي</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Section -->
+          <div class="charts-container">
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <span class="chart-title-icon"
+                    ><i class="fas fa-chart-line"></i
+                  ></span>
+                  <span>تحليل المبيعات</span>
+                </h3>
+                <div class="chart-actions">
+                  <button class="btn btn-sm btn-outline">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>هذا الشهر</span>
+                  </button>
+                </div>
+              </div>
+              <div class="chart-content">
+                <div class="chart-placeholder">
+                  <img
+                    src="/api/placeholder/700/250"
+                    alt="مخطط المبيعات الشهرية"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <span class="chart-title-icon"
+                    ><i class="fas fa-medal"></i
+                  ></span>
+                  <span>المنتجات الأكثر مبيعاً</span>
+                </h3>
+                <div class="chart-actions">
+                  <button class="btn btn-sm btn-outline">
+                    <i class="fas fa-filter"></i>
+                    <span>عرض الكل</span>
+                  </button>
+                </div>
+              </div>
+              <div class="chart-content" style="padding: 0">
+                <div class="top-products">
+                  <div class="product-list">
+                    <div class="product-item">
+                      <div class="product-color product-color-1"></div>
+                      <div class="product-info">
+                        <div class="product-name">باب صيانة مقاوم للحريق</div>
+                        <div class="product-size">60×60 سم</div>
+                      </div>
+                      <div class="product-sales">35%</div>
+                    </div>
+                    <div class="product-item">
+                      <div class="product-color product-color-2"></div>
+                      <div class="product-info">
+                        <div class="product-name">باب صيانة</div>
+                        <div class="product-size">60×60 سم</div>
+                      </div>
+                      <div class="product-sales">25%</div>
+                    </div>
+                    <div class="product-item">
+                      <div class="product-color product-color-3"></div>
+                      <div class="product-info">
+                        <div class="product-name">باب صيانة مقاوم للماء</div>
+                        <div class="product-size">60×60 سم</div>
+                      </div>
+                      <div class="product-sales">18%</div>
+                    </div>
+                    <div class="product-item">
+                      <div class="product-color product-color-4"></div>
+                      <div class="product-info">
+                        <div class="product-name">باب صيانة مقاوم للحريق</div>
+                        <div class="product-size">120×60 سم</div>
+                      </div>
+                      <div class="product-sales">12%</div>
+                    </div>
+                    <div class="product-item">
+                      <div class="product-color product-color-5"></div>
+                      <div class="product-info">
+                        <div class="product-name">باب صيانة</div>
+                        <div class="product-size">20×20 سم</div>
+                      </div>
+                      <div class="product-sales">10%</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Orders -->
+          <div class="table-section">
+            <div class="section-header">
+              <h3 class="section-title">
+                <span class="section-title-icon"
+                  ><i class="fas fa-shopping-cart"></i
+                ></span>
+                <span>أحدث الطلبات</span>
+              </h3>
+              <div class="section-actions">
+                <button class="btn btn-sm btn-outline">
+                  <i class="fas fa-filter"></i>
+                  <span>تصفية</span>
+                </button>
+                <button
+                  class="btn btn-sm btn-primary"
+                  onclick="switchTab('orders')"
+                >
+                  <i class="fas fa-eye"></i>
+                  <span>عرض الكل</span>
+                </button>
+              </div>
+            </div>
+            <div class="section-content">
+              <!-- Table View (Desktop) -->
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>رقم الطلب</th>
+                    <th>العميل</th>
+                    <th>التاريخ</th>
+                    <th>طريقة الدفع</th>
+                    <th>المبلغ</th>
+                    <th>الحالة</th>
+                    <th>الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>#ORD-1028</strong></td>
+                    <td>أحمد الشمري</td>
+                    <td>14 مارس 2025</td>
+                    <td>بطاقة ائتمان</td>
+                    <td><strong>310 د.ك</strong></td>
+                    <td>
+                      <span class="badge badge-warning">قيد المعالجة</span>
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>#ORD-1027</strong></td>
+                    <td>نورة العجمي</td>
+                    <td>14 مارس 2025</td>
+                    <td>K-net</td>
+                    <td><strong>160 د.ك</strong></td>
+                    <td>
+                      <span class="badge badge-warning">قيد المعالجة</span>
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>#ORD-1026</strong></td>
+                    <td>فيصل المطيري</td>
+                    <td>13 مارس 2025</td>
+                    <td>K-net</td>
+                    <td><strong>90 د.ك</strong></td>
+                    <td><span class="badge badge-info">تم الشحن</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Card View (Mobile) -->
+              <div class="card-view">
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">رقم الطلب:</div>
+                    <div class="card-view-value">
+                      <strong>#ORD-1028</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">العميل:</div>
+                    <div class="card-view-value">أحمد الشمري</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">التاريخ:</div>
+                    <div class="card-view-value">14 مارس 2025</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المبلغ:</div>
+                    <div class="card-view-value"><strong>310 د.ك</strong></div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <span class="badge badge-warning">قيد المعالجة</span>
+                    </div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-eye"></i>
+                      <span>عرض</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">رقم الطلب:</div>
+                    <div class="card-view-value">
+                      <strong>#ORD-1027</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">العميل:</div>
+                    <div class="card-view-value">نورة العجمي</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">التاريخ:</div>
+                    <div class="card-view-value">14 مارس 2025</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المبلغ:</div>
+                    <div class="card-view-value"><strong>160 د.ك</strong></div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <span class="badge badge-warning">قيد المعالجة</span>
+                    </div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-eye"></i>
+                      <span>عرض</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">رقم الطلب:</div>
+                    <div class="card-view-value">
+                      <strong>#ORD-1026</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">العميل:</div>
+                    <div class="card-view-value">فيصل المطيري</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">التاريخ:</div>
+                    <div class="card-view-value">13 مارس 2025</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المبلغ:</div>
+                    <div class="card-view-value"><strong>90 د.ك</strong></div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <span class="badge badge-info">تم الشحن</span>
+                    </div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-eye"></i>
+                      <span>عرض</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Low Stock Products -->
+          <div class="table-section">
+            <div class="section-header">
+              <h3 class="section-title">
+                <span class="section-title-icon"
+                  ><i class="fas fa-exclamation-triangle"></i
+                ></span>
+                <span>المنتجات منخفضة المخزون</span>
+              </h3>
+              <div class="section-actions">
+                <button
+                  class="btn btn-sm btn-primary"
+                  onclick="switchTab('inventory')"
+                >
+                  <i class="fas fa-boxes"></i>
+                  <span>إدارة المخزون</span>
+                </button>
+              </div>
+            </div>
+            <div class="section-content">
+              <!-- Table View (Desktop) -->
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>المنتج</th>
+                    <th>المقاس</th>
+                    <th>حالة المخزون</th>
+                    <th>المخزون الحالي</th>
+                    <th>الحد الأدنى</th>
+                    <th>المتوقع نفاده خلال</th>
+                    <th>الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>باب صيانة مقاوم للحريق</strong></td>
+                    <td>120×60 سم</td>
+                    <td>
+                      <div class="inventory-status">
+                        <div class="stock-indicator stock-low"></div>
+                        <span>منخفض جداً</span>
+                      </div>
+                    </td>
+                    <td>3</td>
+                    <td>20</td>
+                    <td>أسبوع واحد</td>
+                    <td>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>طلب فوري</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>باب صيانة مقاوم للحريق</strong></td>
+                    <td>60×60 سم</td>
+                    <td>
+                      <div class="inventory-status">
+                        <div class="stock-indicator stock-low"></div>
+                        <span>منخفض</span>
+                      </div>
+                    </td>
+                    <td>12</td>
+                    <td>20</td>
+                    <td>3 أسابيع</td>
+                    <td>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>طلب فوري</span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Card View (Mobile) -->
+              <div class="card-view">
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">المنتج:</div>
+                    <div class="card-view-value">
+                      <strong>باب صيانة مقاوم للحريق</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المقاس:</div>
+                    <div class="card-view-value">120×60 سم</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">حالة المخزون:</div>
+                    <div class="card-view-value">
+                      <div class="inventory-status">
+                        <div class="stock-indicator stock-low"></div>
+                        <span>منخفض جداً</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المخزون الحالي:</div>
+                    <div class="card-view-value">3 (الحد الأدنى: 20)</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المتوقع نفاده خلال:</div>
+                    <div class="card-view-value">أسبوع واحد</div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-danger">
+                      <i class="fas fa-shopping-cart"></i>
+                      <span>طلب فوري</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">المنتج:</div>
+                    <div class="card-view-value">
+                      <strong>باب صيانة مقاوم للحريق</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المقاس:</div>
+                    <div class="card-view-value">60×60 سم</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">حالة المخزون:</div>
+                    <div class="card-view-value">
+                      <div class="inventory-status">
+                        <div class="stock-indicator stock-low"></div>
+                        <span>منخفض</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المخزون الحالي:</div>
+                    <div class="card-view-value">12 (الحد الأدنى: 20)</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المتوقع نفاده خلال:</div>
+                    <div class="card-view-value">3 أسابيع</div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-danger">
+                      <i class="fas fa-shopping-cart"></i>
+                      <span>طلب فوري</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products Tab -->
+        <div class="tab-content" id="products-tab">
+          <div class="table-section">
+            <div class="section-header">
+              <h3 class="section-title">
+                <span class="section-title-icon"
+                  ><i class="fas fa-door-open"></i
+                ></span>
+                <span>إدارة المنتجات</span>
+              </h3>
+              <div class="section-actions">
+                <button class="btn btn-sm btn-outline">
+                  <i class="fas fa-filter"></i>
+                  <span>تصفية</span>
+                </button>
+                <button class="btn btn-primary">
+                  <i class="fas fa-plus"></i>
+                  <span>إضافة منتج جديد</span>
+                </button>
+              </div>
+            </div>
+            <div class="section-content">
+              <!-- Table View (Desktop) -->
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>المنتج</th>
+                    <th>المقاس</th>
+                    <th>النوع</th>
+                    <th>السعر الحالي</th>
+                    <th>السعر الأصلي</th>
+                    <th>الخصم</th>
+                    <th>المخزون</th>
+                    <th>الحالة</th>
+                    <th>الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>باب صيانة</strong></td>
+                    <td>20×20 سم</td>
+                    <td>قياسي</td>
+                    <td>30 د.ك</td>
+                    <td>32 د.ك</td>
+                    <td>6%</td>
+                    <td>105</td>
+                    <td><span class="badge badge-success">متوفر</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>باب صيانة</strong></td>
+                    <td>30×30 سم</td>
+                    <td>قياسي</td>
+                    <td>45 د.ك</td>
+                    <td>48 د.ك</td>
+                    <td>6%</td>
+                    <td>87</td>
+                    <td><span class="badge badge-success">متوفر</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>باب صيانة</strong></td>
+                    <td>60×60 سم</td>
+                    <td>قياسي</td>
+                    <td>90 د.ك</td>
+                    <td>98 د.ك</td>
+                    <td>8%</td>
+                    <td>42</td>
+                    <td><span class="badge badge-success">متوفر</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Card View (Mobile) -->
+              <div class="card-view">
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">المنتج:</div>
+                    <div class="card-view-value">
+                      <strong>باب صيانة</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المقاس:</div>
+                    <div class="card-view-value">20×20 سم</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">النوع:</div>
+                    <div class="card-view-value">قياسي</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">السعر:</div>
+                    <div class="card-view-value">
+                      30 د.ك <small>(أصلي: 32 د.ك)</small>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المخزون:</div>
+                    <div class="card-view-value">105</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <span class="badge badge-success">متوفر</span>
+                    </div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-edit"></i>
+                      <span>تعديل</span>
+                    </button>
+                    <button class="btn btn-sm btn-danger">
+                      <i class="fas fa-trash"></i>
+                      <span>حذف</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">المنتج:</div>
+                    <div class="card-view-value">
+                      <strong>باب صيانة</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المقاس:</div>
+                    <div class="card-view-value">30×30 سم</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">النوع:</div>
+                    <div class="card-view-value">قياسي</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">السعر:</div>
+                    <div class="card-view-value">
+                      45 د.ك <small>(أصلي: 48 د.ك)</small>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المخزون:</div>
+                    <div class="card-view-value">87</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <span class="badge badge-success">متوفر</span>
+                    </div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-edit"></i>
+                      <span>تعديل</span>
+                    </button>
+                    <button class="btn btn-sm btn-danger">
+                      <i class="fas fa-trash"></i>
+                      <span>حذف</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orders Tab -->
+        <div class="tab-content" id="orders-tab">
+          <div class="table-section">
+            <div class="section-header">
+              <h3 class="section-title">
+                <span class="section-title-icon"
+                  ><i class="fas fa-shopping-cart"></i
+                ></span>
+                <span>إدارة الطلبات</span>
+              </h3>
+              <div class="section-actions">
+                <button class="btn btn-sm btn-outline">
+                  <i class="fas fa-filter"></i>
+                  <span>تصفية</span>
+                </button>
+                <button class="btn btn-primary">
+                  <i class="fas fa-plus"></i>
+                  <span>إضافة طلب جديد</span>
+                </button>
+              </div>
+            </div>
+            <div class="section-content">
+              <!-- Table View (Desktop) -->
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>رقم الطلب</th>
+                    <th>العميل</th>
+                    <th>رقم الهاتف</th>
+                    <th>تاريخ الطلب</th>
+                    <th>طريقة الدفع</th>
+                    <th>المبلغ</th>
+                    <th>الحالة</th>
+                    <th>الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>#ORD-1028</strong></td>
+                    <td>أحمد الشمري</td>
+                    <td>+965 9912 4567</td>
+                    <td>14 مارس 2025</td>
+                    <td>بطاقة ائتمان</td>
+                    <td><strong>310 د.ك</strong></td>
+                    <td>
+                      <span class="badge badge-warning">قيد المعالجة</span>
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-sm btn-success">
+                        <i class="fas fa-check"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>#ORD-1027</strong></td>
+                    <td>نورة العجمي</td>
+                    <td>+965 9834 5678</td>
+                    <td>14 مارس 2025</td>
+                    <td>K-net</td>
+                    <td><strong>160 د.ك</strong></td>
+                    <td>
+                      <span class="badge badge-warning">قيد المعالجة</span>
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-sm btn-success">
+                        <i class="fas fa-check"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>#ORD-1026</strong></td>
+                    <td>فيصل المطيري</td>
+                    <td>+965 9756 7890</td>
+                    <td>13 مارس 2025</td>
+                    <td>K-net</td>
+                    <td><strong>90 د.ك</strong></td>
+                    <td><span class="badge badge-info">تم الشحن</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-sm btn-success">
+                        <i class="fas fa-check"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Card View (Mobile) -->
+              <div class="card-view">
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">رقم الطلب:</div>
+                    <div class="card-view-value">
+                      <strong>#ORD-1028</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">العميل:</div>
+                    <div class="card-view-value">أحمد الشمري</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">رقم الهاتف:</div>
+                    <div class="card-view-value">+965 9912 4567</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">التاريخ:</div>
+                    <div class="card-view-value">14 مارس 2025</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المبلغ:</div>
+                    <div class="card-view-value"><strong>310 د.ك</strong></div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <span class="badge badge-warning">قيد المعالجة</span>
+                    </div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-eye"></i>
+                      <span>عرض</span>
+                    </button>
+                    <button class="btn btn-sm btn-success">
+                      <i class="fas fa-check"></i>
+                      <span>تحديث</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">رقم الطلب:</div>
+                    <div class="card-view-value">
+                      <strong>#ORD-1027</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">العميل:</div>
+                    <div class="card-view-value">نورة العجمي</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">رقم الهاتف:</div>
+                    <div class="card-view-value">+965 9834 5678</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">التاريخ:</div>
+                    <div class="card-view-value">14 مارس 2025</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المبلغ:</div>
+                    <div class="card-view-value"><strong>160 د.ك</strong></div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <span class="badge badge-warning">قيد المعالجة</span>
+                    </div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-eye"></i>
+                      <span>عرض</span>
+                    </button>
+                    <button class="btn btn-sm btn-success">
+                      <i class="fas fa-check"></i>
+                      <span>تحديث</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inventory Tab -->
+        <div class="tab-content" id="inventory-tab">
+          <div class="table-section">
+            <div class="section-header">
+              <h3 class="section-title">
+                <span class="section-title-icon"
+                  ><i class="fas fa-boxes"></i
+                ></span>
+                <span>إدارة المخزون</span>
+              </h3>
+              <div class="section-actions">
+                <button class="btn btn-sm btn-outline">
+                  <i class="fas fa-filter"></i>
+                  <span>تصفية</span>
+                </button>
+                <button class="btn btn-primary">
+                  <i class="fas fa-plus"></i>
+                  <span>إضافة شحنة جديدة</span>
+                </button>
+              </div>
+            </div>
+            <div class="section-content">
+              <!-- Table View (Desktop) -->
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>المنتج</th>
+                    <th>المقاس</th>
+                    <th>الفئة</th>
+                    <th>المخزون الحالي</th>
+                    <th>الحد الأدنى</th>
+                    <th>الحالة</th>
+                    <th>آخر شحنة</th>
+                    <th>المتوقع نفاده خلال</th>
+                    <th>الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>باب صيانة</strong></td>
+                    <td>20×20 سم</td>
+                    <td>قياسي</td>
+                    <td>105</td>
+                    <td>20</td>
+                    <td>
+                      <div class="inventory-status">
+                        <div class="stock-indicator stock-high"></div>
+                        <span>مرتفع</span>
+                      </div>
+                    </td>
+                    <td>28 فبراير 2025</td>
+                    <td>6 أشهر</td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>باب صيانة مقاوم للحريق</strong></td>
+                    <td>60×60 سم</td>
+                    <td>مقاوم للحريق</td>
+                    <td>12</td>
+                    <td>20</td>
+                    <td>
+                      <div class="inventory-status">
+                        <div class="stock-indicator stock-low"></div>
+                        <span>منخفض</span>
+                      </div>
+                    </td>
+                    <td>5 فبراير 2025</td>
+                    <td>3 أسابيع</td>
+                    <td>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-shopping-cart"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Card View (Mobile) -->
+              <div class="card-view">
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">المنتج:</div>
+                    <div class="card-view-value">
+                      <strong>باب صيانة</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المقاس:</div>
+                    <div class="card-view-value">20×20 سم</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الفئة:</div>
+                    <div class="card-view-value">قياسي</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المخزون الحالي:</div>
+                    <div class="card-view-value">105 (الحد الأدنى: 20)</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <div class="inventory-status">
+                        <div class="stock-indicator stock-high"></div>
+                        <span>مرتفع</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">آخر شحنة:</div>
+                    <div class="card-view-value">28 فبراير 2025</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المتوقع نفاده خلال:</div>
+                    <div class="card-view-value">6 أشهر</div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-edit"></i>
+                      <span>تعديل</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">المنتج:</div>
+                    <div class="card-view-value">
+                      <strong>باب صيانة مقاوم للحريق</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المقاس:</div>
+                    <div class="card-view-value">60×60 سم</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الفئة:</div>
+                    <div class="card-view-value">مقاوم للحريق</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المخزون الحالي:</div>
+                    <div class="card-view-value">12 (الحد الأدنى: 20)</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <div class="inventory-status">
+                        <div class="stock-indicator stock-low"></div>
+                        <span>منخفض</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">آخر شحنة:</div>
+                    <div class="card-view-value">5 فبراير 2025</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">المتوقع نفاده خلال:</div>
+                    <div class="card-view-value">3 أسابيع</div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-danger">
+                      <i class="fas fa-shopping-cart"></i>
+                      <span>طلب</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div class="tab-content" id="settings-tab">
+          <div class="table-section">
+            <div class="section-header">
+              <h3 class="section-title">
+                <span class="section-title-icon"
+                  ><i class="fas fa-cog"></i
+                ></span>
+                <span>إعدادات المتجر</span>
+              </h3>
+            </div>
+            <div class="section-content" style="padding: var(--space-6)">
+              <form>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label">
+                      <!-- Settings Tab -->
+                      <div class="tab-content" id="settings-tab">
+                        <div class="table-section">
+                          <div class="section-header">
+                            <h3 class="section-title">
+                              <span class="section-title-icon"
+                                ><i class="fas fa-cog"></i
+                              ></span>
+                              <span>إعدادات المتجر</span>
+                            </h3>
+                          </div>
+                          <div
+                            class="section-content"
+                            style="padding: var(--space-6)"
+                          >
+                            <form>
+                              <div class="form-grid">
+                                <div class="form-group">
+                                  <label class="form-label">اسم الشركة</label>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    value="متجر جوريم"
+                                  />
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="form-label"
+                                    >البريد الإلكتروني</label
+                                  >
+                                  <input
+                                    type="email"
+                                    class="form-control"
+                                    value="info@jureem.com"
+                                  />
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="form-label">رقم الهاتف</label>
+                                  <input
+                                    type="tel"
+                                    class="form-control"
+                                    value="+965 2291 0000"
+                                    dir="ltr"
+                                  />
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="form-label">العنوان</label>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    value="الكويت - حولي - شارع تونس"
+                                  />
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="form-label">عملة المتجر</label>
+                                  <select class="form-control">
+                                    <option selected>دينار كويتي (KWD)</option>
+                                    <option>ريال سعودي (SAR)</option>
+                                    <option>دولار أمريكي (USD)</option>
+                                  </select>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="form-label"
+                                    >تنبيه المخزون المنخفض (أقل من)</label
+                                  >
+                                  <input
+                                    type="number"
+                                    class="form-control"
+                                    value="20"
+                                    min="1"
+                                  />
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="form-label"
+                                    >مدة الضمان الافتراضية</label
+                                  >
+                                  <select class="form-control">
+                                    <option>سنة واحدة</option>
+                                    <option>سنتان</option>
+                                    <option>3 سنوات</option>
+                                    <option selected>5 سنوات</option>
+                                  </select>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="form-label">رسوم التوصيل</label>
+                                  <div class="input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      value="5"
+                                      min="0"
+                                      step="0.5"
+                                    />
+                                    <span class="input-group-text">د.ك</span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-actions">
+                                <button type="submit" class="btn btn-success">
+                                  <i class="fas fa-save"></i>
+                                  <span>حفظ الإعدادات</span>
+                                </button>
+                                <button type="reset" class="btn btn-outline">
+                                  <i class="fas fa-undo"></i>
+                                  <span>إعادة تعيين</span>
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Users Tab -->
+                      <div class="tab-content" id="users-tab">
+                        <div class="table-section">
+                          <div class="section-header">
+                            <h3 class="section-title">
+                              <span class="section-title-icon"
+                                ><i class="fas fa-user-shield"></i
+                              ></span>
+                              <span>إدارة المستخدمين</span>
+                            </h3>
+                            <div class="section-actions">
+                              <button class="btn btn-primary">
+                                <i class="fas fa-plus"></i>
+                                <span>إضافة مستخدم جديد</span>
+                              </button>
+                            </div>
+                          </div>
+                          <div class="section-content">
+                            <!-- Table View (Desktop) -->
+                            <table class="data-table">
+                              <thead>
+                                <tr>
+                                  <th>الاسم</th>
+                                  <th>البريد الإلكتروني</th>
+                                  <th>الصلاحية</th>
+                                  <th>رقم الهاتف</th>
+                                  <th>آخر تسجيل دخول</th>
+                                  <th>الحالة</th>
+                                  <th>الإجراءات</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><strong>محمد الحربي</strong></td>
+                                  <td>mohammed@jureem.com</td>
+                                  <td>مدير</td>
+                                  <td>+965 9912 0001</td>
+                                  <td>14 مارس 2025</td>
+                                  <td>
+                                    <span class="badge badge-success">نشط</span>
+                                  </td>
+                                  <td>
+                                    <button class="btn btn-sm btn-primary">
+                                      <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger">
+                                      <i class="fas fa-user-slash"></i>
+                                    </button>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><strong>سارة علي</strong></td>
+                                  <td>sara@jureem.com</td>
+                                  <td>موظف</td>
+                                  <td>+965 9912 0002</td>
+                                  <td>14 مارس 2025</td>
+                                  <td>
+                                    <span class="badge badge-success">نشط</span>
+                                  </td>
+                                  <td>
+                                    <button class="btn btn-sm btn-primary">
+                                      <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger">
+                                      <i class="fas fa-user-slash"></i>
+                                    </button>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><strong>خالد العنزي</strong></td>
+                                  <td>khaled@jureem.com</td>
+                                  <td>موظف</td>
+                                  <td>+965 9912 0003</td>
+                                  <td>13 مارس 2025</td>
+                                  <td>
+                                    <span class="badge badge-success">نشط</span>
+                                  </td>
+                                  <td>
+                                    <button class="btn btn-sm btn-primary">
+                                      <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger">
+                                      <i class="fas fa-user-slash"></i>
+                                    </button>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <!-- Card View (Mobile) -->
+                            <div class="card-view">
+                              <div class="card-view-item">
+                                <div class="card-view-row">
+                                  <div class="card-view-label">الاسم:</div>
+                                  <div class="card-view-value">
+                                    <strong>محمد الحربي</strong>
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">
+                                    البريد الإلكتروني:
+                                  </div>
+                                  <div class="card-view-value">
+                                    mohammed@jureem.com
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">الصلاحية:</div>
+                                  <div class="card-view-value">مدير</div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">رقم الهاتف:</div>
+                                  <div class="card-view-value">
+                                    +965 9912 0001
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">
+                                    آخر تسجيل دخول:
+                                  </div>
+                                  <div class="card-view-value">
+                                    14 مارس 2025
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">الحالة:</div>
+                                  <div class="card-view-value">
+                                    <span class="badge badge-success">نشط</span>
+                                  </div>
+                                </div>
+                                <div class="card-view-actions">
+                                  <button class="btn btn-sm btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                    <span>تعديل</span>
+                                  </button>
+                                  <button class="btn btn-sm btn-danger">
+                                    <i class="fas fa-user-slash"></i>
+                                    <span>تعطيل</span>
+                                  </button>
+                                </div>
+                              </div>
+
+                              <div class="card-view-item">
+                                <div class="card-view-row">
+                                  <div class="card-view-label">الاسم:</div>
+                                  <div class="card-view-value">
+                                    <strong>سارة علي</strong>
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">
+                                    البريد الإلكتروني:
+                                  </div>
+                                  <div class="card-view-value">
+                                    sara@jureem.com
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">الصلاحية:</div>
+                                  <div class="card-view-value">موظف</div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">رقم الهاتف:</div>
+                                  <div class="card-view-value">
+                                    +965 9912 0002
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">
+                                    آخر تسجيل دخول:
+                                  </div>
+                                  <div class="card-view-value">
+                                    14 مارس 2025
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">الحالة:</div>
+                                  <div class="card-view-value">
+                                    <span class="badge badge-success">نشط</span>
+                                  </div>
+                                </div>
+                                <div class="card-view-actions">
+                                  <button class="btn btn-sm btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                    <span>تعديل</span>
+                                  </button>
+                                  <button class="btn btn-sm btn-danger">
+                                    <i class="fas fa-user-slash"></i>
+                                    <span>تعطيل</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Customers Tab -->
+                      <div class="tab-content" id="customers-tab">
+                        <div class="table-section">
+                          <div class="section-header">
+                            <h3 class="section-title">
+                              <span class="section-title-icon"
+                                ><i class="fas fa-users"></i
+                              ></span>
+                              <span>إدارة العملاء</span>
+                            </h3>
+                            <div class="section-actions">
+                              <button class="btn btn-sm btn-outline">
+                                <i class="fas fa-filter"></i>
+                                <span>تصفية</span>
+                              </button>
+                              <button class="btn btn-primary">
+                                <i class="fas fa-plus"></i>
+                                <span>إضافة عميل جديد</span>
+                              </button>
+                            </div>
+                          </div>
+                          <div class="section-content">
+                            <!-- Table View (Desktop) -->
+                            <table class="data-table">
+                              <thead>
+                                <tr>
+                                  <th>الاسم</th>
+                                  <th>البريد الإلكتروني</th>
+                                  <th>رقم الهاتف</th>
+                                  <th>عدد الطلبات</th>
+                                  <th>إجمالي المشتريات</th>
+                                  <th>آخر طلب</th>
+                                  <th>الإجراءات</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><strong>أحمد الشمري</strong></td>
+                                  <td>ahmed@example.com</td>
+                                  <td>+965 9912 4567</td>
+                                  <td>5</td>
+                                  <td>760 د.ك</td>
+                                  <td>14 مارس 2025</td>
+                                  <td>
+                                    <button class="btn btn-sm btn-primary">
+                                      <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-info">
+                                      <i class="fas fa-history"></i>
+                                    </button>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><strong>نورة العجمي</strong></td>
+                                  <td>noura@example.com</td>
+                                  <td>+965 9834 5678</td>
+                                  <td>3</td>
+                                  <td>425 د.ك</td>
+                                  <td>14 مارس 2025</td>
+                                  <td>
+                                    <button class="btn btn-sm btn-primary">
+                                      <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-info">
+                                      <i class="fas fa-history"></i>
+                                    </button>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><strong>خالد العتيبي</strong></td>
+                                  <td>khaled@example.com</td>
+                                  <td>+965 9912 3456</td>
+                                  <td>4</td>
+                                  <td>650 د.ك</td>
+                                  <td>13 مارس 2025</td>
+                                  <td>
+                                    <button class="btn btn-sm btn-primary">
+                                      <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-info">
+                                      <i class="fas fa-history"></i>
+                                    </button>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <!-- Card View (Mobile) -->
+                            <div class="card-view">
+                              <div class="card-view-item">
+                                <div class="card-view-row">
+                                  <div class="card-view-label">الاسم:</div>
+                                  <div class="card-view-value">
+                                    <strong>أحمد الشمري</strong>
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">
+                                    البريد الإلكتروني:
+                                  </div>
+                                  <div class="card-view-value">
+                                    ahmed@example.com
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">رقم الهاتف:</div>
+                                  <div class="card-view-value">
+                                    +965 9912 4567
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">
+                                    عدد الطلبات:
+                                  </div>
+                                  <div class="card-view-value">5</div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">
+                                    إجمالي المشتريات:
+                                  </div>
+                                  <div class="card-view-value">
+                                    <strong>760 د.ك</strong>
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">آخر طلب:</div>
+                                  <div class="card-view-value">
+                                    14 مارس 2025
+                                  </div>
+                                </div>
+                                <div class="card-view-actions">
+                                  <button class="btn btn-sm btn-primary">
+                                    <i class="fas fa-eye"></i>
+                                    <span>عرض</span>
+                                  </button>
+                                  <button class="btn btn-sm btn-info">
+                                    <i class="fas fa-history"></i>
+                                    <span>السجل</span>
+                                  </button>
+                                </div>
+                              </div>
+
+                              <div class="card-view-item">
+                                <div class="card-view-row">
+                                  <div class="card-view-label">الاسم:</div>
+                                  <div class="card-view-value">
+                                    <strong>نورة العجمي</strong>
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">
+                                    البريد الإلكتروني:
+                                  </div>
+                                  <div class="card-view-value">
+                                    noura@example.com
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">رقم الهاتف:</div>
+                                  <div class="card-view-value">
+                                    +965 9834 5678
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">
+                                    عدد الطلبات:
+                                  </div>
+                                  <div class="card-view-value">3</div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">
+                                    إجمالي المشتريات:
+                                  </div>
+                                  <div class="card-view-value">
+                                    <strong>425 د.ك</strong>
+                                  </div>
+                                </div>
+                                <div class="card-view-row">
+                                  <div class="card-view-label">آخر طلب:</div>
+                                  <div class="card-view-value">
+                                    14 مارس 2025
+                                  </div>
+                                </div>
+                                <div class="card-view-actions">
+                                  <button class="btn btn-sm btn-primary">
+                                    <i class="fas fa-eye"></i>
+                                    <span>عرض</span>
+                                  </button>
+                                  <button class="btn btn-sm btn-info">
+                                    <i class="fas fa-history"></i>
+                                    <span>السجل</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Reports Tab -->
+                      <div class="tab-content" id="reports-tab">
+                        <div class="charts-container">
+                          <div class="chart-card">
+                            <div class="chart-header">
+                              <h3 class="chart-title">
+                                <span class="chart-title-icon"
+                                  ><i class="fas fa-chart-line"></i
+                                ></span>
+                                <span>مبيعات الأشهر الأخيرة</span>
+                              </h3>
+                              <div class="chart-actions">
+                                <button class="btn btn-sm btn-outline">
+                                  <i class="fas fa-calendar-alt"></i>
+                                  <span>السنة الحالية</span>
+                                </button>
+                                <button class="btn btn-sm btn-outline">
+                                  <i class="fas fa-download"></i>
+                                  <span>تصدير</span>
+                                </button>
+                              </div>
+                            </div>
+                            <div class="chart-content">
+                              <div class="chart-placeholder">
+                                <img
+                                  src="/api/placeholder/700/300"
+                                  alt="مخطط المبيعات الشهرية"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="charts-container">
+                          <div class="chart-card">
+                            <div class="chart-header">
+                              <h3 class="chart-title">
+                                <span class="chart-title-icon"
+                                  ><i class="fas fa-chart-pie"></i
+                                ></span>
+                                <span>توزيع المبيعات حسب المنتج</span>
+                              </h3>
+                              <div class="chart-actions">
+                                <button class="btn btn-sm btn-outline">
+                                  <i class="fas fa-download"></i>
+                                  <span>تصدير</span>
+                                </button>
+                              </div>
+                            </div>
+                            <div class="chart-content">
+                              <div class="chart-placeholder">
+                                <img
+                                  src="/api/placeholder/500/300"
+                                  alt="مخطط توزيع المبيعات"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="chart-card">
+                            <div class="chart-header">
+                              <h3 class="chart-title">
+                                <span class="chart-title-icon"
+                                  ><i class="fas fa-dollar-sign"></i
+                                ></span>
+                                <span>إجمالي المبيعات</span>
+                              </h3>
+                              <div class="chart-actions">
+                                <button class="btn btn-sm btn-outline">
+                                  <i class="fas fa-filter"></i>
+                                  <span>تصفية</span>
+                                </button>
+                              </div>
+                            </div>
+                            <div class="chart-content">
+                              <div
+                                class="table-section"
+                                style="
+                                  box-shadow: none;
+                                  border: none;
+                                  margin-bottom: 0;
+                                "
+                              >
+                                <table class="data-table">
+                                  <thead>
+                                    <tr>
+                                      <th>الشهر</th>
+                                      <th>إجمالي المبيعات</th>
+                                      <th>عدد الطلبات</th>
+                                      <th>متوسط قيمة الطلب</th>
+                                      <th>نسبة النمو</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td><strong>مارس 2025</strong></td>
+                                      <td>21,430 د.ك</td>
+                                      <td>178</td>
+                                      <td>120.4 د.ك</td>
+                                      <td>
+                                        <span
+                                          style="color: var(--success-color)"
+                                        >
+                                          <i class="fas fa-arrow-up"></i> 5.3%
+                                        </span>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>فبراير 2025</strong></td>
+                                      <td>20,350 د.ك</td>
+                                      <td>164</td>
+                                      <td>124.1 د.ك</td>
+                                      <td>
+                                        <span
+                                          style="color: var(--success-color)"
+                                        >
+                                          <i class="fas fa-arrow-up"></i> 4.2%
+                                        </span>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>يناير 2025</strong></td>
+                                      <td>19,520 د.ك</td>
+                                      <td>159</td>
+                                      <td>122.8 د.ك</td>
+                                      <td>
+                                        <span
+                                          style="color: var(--danger-color)"
+                                        >
+                                          <i class="fas fa-arrow-down"></i> 2.1%
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <style>
+                        /* Additional Styles for Input Groups */
+                        .input-group {
+                          position: relative;
+                          display: flex;
+                          width: 100%;
+                        }
+
+                        .input-group-text {
+                          display: flex;
+                          align-items: center;
+                          padding: var(--space-3) var(--space-4);
+                          font-size: var(--fs-base);
+                          color: var(--text-color);
+                          text-align: center;
+                          background-color: var(--bg-dark);
+                          border: 1px solid var(--border-color);
+                          border-right: none;
+                          border-radius: 0 var(--radius) var(--radius) 0;
+                          white-space: nowrap;
+                        }
+
+                        .input-group .form-control {
+                          border-left: none;
+                          border-radius: var(--radius) 0 0 var(--radius);
+                        }
+
+                        /* Responsive Settings Form */
+                        @media (max-width: 768px) {
+                          .form-actions {
+                            flex-direction: column;
+                            gap: var(--space-3);
+                          }
+
+                          .form-actions .btn {
+                            width: 100%;
+                          }
+
+                          .form-grid {
+                            grid-template-columns: 1fr;
+                          }
+                        }
+
+                        /* Print Styles */
+                        @media print {
+                          .sidebar,
+                          .mobile-header,
+                          .card-view,
+                          .btn,
+                          .chart-actions {
+                            display: none !important;
+                          }
+
+                          .dashboard {
+                            display: block;
+                          }
+
+                          .main-content {
+                            padding: 0;
+                            margin: 0;
+                            width: 100%;
+                          }
+
+                          .data-table {
+                            display: table;
+                            width: 100%;
+                            border-collapse: collapse;
+                          }
+
+                          .table-section,
+                          .chart-card {
+                            box-shadow: none;
+                            border: 1px solid #ccc;
+                            page-break-inside: avoid;
+                            margin-bottom: 10mm;
+                          }
+                        }
+                      </style></label
+                    >
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- Add JavaScript for tab switching -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Referencias a elementos del DOM
+        const menuToggle = document.getElementById("menu-toggle");
+        const sidebar = document.getElementById("sidebar");
+        const sidebarOverlay = document.getElementById("sidebar-overlay");
+        const menuLinks = document.querySelectorAll(".menu-link");
+        const tabContents = document.querySelectorAll(".tab-content");
+        const currentPageTitle = document.getElementById("current-page-title");
+
+        // Configuración de iconos para las páginas
+        const pageIcons = {
+          dashboard: "fas fa-home",
+          orders: "fas fa-shopping-cart",
+          products: "fas fa-door-open",
+          inventory: "fas fa-boxes",
+          customers: "fas fa-users",
+          users: "fas fa-user-shield",
+          reports: "fas fa-chart-line",
+          settings: "fas fa-cog",
+        };
+
+        // Función para mostrar/ocultar el sidebar
+        function toggleSidebar() {
+          sidebar.classList.toggle("active");
+          sidebarOverlay.classList.toggle("active");
+          console.log("Toggled sidebar");
+        }
+
+        // Toggle sidebar al hacer clic en el botón del menú
+        if (menuToggle) {
+          menuToggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            toggleSidebar();
+          });
+        }
+
+        // Ocultar sidebar al hacer clic en el overlay
+        if (sidebarOverlay) {
+          sidebarOverlay.addEventListener("click", function () {
+            toggleSidebar();
+          });
+        }
+
+        // Función para cambiar entre tabs
+        function switchTab(tabId) {
+          // Quitar clase 'active' de todos los tabs y links
+          tabContents.forEach((tab) => tab.classList.remove("active"));
+          menuLinks.forEach((link) => link.classList.remove("active"));
+
+          // Añadir clase 'active' al tab y link seleccionados
+          const selectedTab = document.getElementById(tabId + "-tab");
+          const selectedMenuLink = document.querySelector(
+            `.menu-link[data-tab="${tabId}"]`
+          );
+
+          if (selectedTab) {
+            selectedTab.classList.add("active");
+          }
+
+          if (selectedMenuLink) {
+            selectedMenuLink.classList.add("active");
+          }
+
+          // Actualizar título de la página
+          if (currentPageTitle) {
+            const tabName = selectedMenuLink
+              ? selectedMenuLink.querySelector("span:last-child").textContent
+              : tabId;
+            currentPageTitle.textContent = tabName;
+
+            // Actualizar icono del título
+            const pageTitleIcon = document.querySelector(".page-title-icon i");
+            if (pageTitleIcon && pageIcons[tabId]) {
+              pageTitleIcon.className = pageIcons[tabId];
+            }
+          }
+
+          // Cerrar sidebar en móvil después de seleccionar
+          if (window.innerWidth <= 1024) {
+            sidebar.classList.remove("active");
+            sidebarOverlay.classList.remove("active");
+          }
+        }
+
+        // Añadir evento click a todos los links del menú
+        menuLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const tabId = this.getAttribute("data-tab");
+            switchTab(tabId);
+
+            // Actualizar URL hash sin scroll
+            history.pushState(null, null, `#${tabId}`);
+          });
+        });
+
+        // Hacer función switchTab global para eventos onclick inline
+        window.switchTab = switchTab;
+
+        // Comprobar hash en URL al cargar la página
+        if (window.location.hash) {
+          const tabId = window.location.hash.substring(1);
+          switchTab(tabId);
+        }
+
+        // Efecto de transición de página
+        const pageTransition = document.getElementById("page-transition");
+        if (pageTransition) {
+          pageTransition.classList.add("active");
+
+          setTimeout(function () {
+            pageTransition.classList.remove("active");
+          }, 800);
+        }
+      });
+    </script>
+  </body>
+</html>
