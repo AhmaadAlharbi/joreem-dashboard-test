@@ -1084,6 +1084,148 @@
         margin-top: var(--space-8);
       }
 
+      /* Modal Styles */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-container {
+        width: 90%;
+        max-width: 1000px;
+        max-height: 90vh;
+        border-radius: var(--radius-md);
+        background-color: var(--bg-light);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        z-index: 1;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-5);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .modal-title {
+        font-size: var(--fs-xl);
+        font-weight: 600;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .modal-close {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius);
+        background-color: var(--bg-color);
+        border: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--text-color);
+        font-size: var(--fs-lg);
+        transition: var(--transition);
+      }
+
+      .modal-close:hover {
+        background-color: var(--danger-light);
+        color: var(--danger-color);
+      }
+
+      .modal-content {
+        padding: var(--space-6);
+        overflow-y: auto;
+        max-height: calc(90vh - 130px);
+      }
+
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--space-3);
+        padding: var(--space-5);
+        border-top: 1px solid var(--border-color);
+      }
+
+      .order-details-section {
+        margin-bottom: var(--space-6);
+      }
+
+      .order-details-section h4 {
+        margin-bottom: var(--space-4);
+        font-size: var(--fs-md);
+        font-weight: 600;
+        padding-bottom: var(--space-2);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: var(--space-4);
+      }
+
+      .details-item {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+      }
+
+      .details-item label {
+        font-weight: 600;
+        color: var(--text-light);
+        font-size: var(--fs-sm);
+      }
+
+      /* Additional Styles for Input Groups */
+      .input-group {
+        position: relative;
+        display: flex;
+        width: 100%;
+      }
+
+      .input-group-text {
+        display: flex;
+        align-items: center;
+        padding: var(--space-3) var(--space-4);
+        font-size: var(--fs-base);
+        color: var(--text-color);
+        text-align: center;
+        background-color: var(--bg-dark);
+        border: 1px solid var(--border-color);
+        border-right: none;
+        border-radius: 0 var(--radius) var(--radius) 0;
+        white-space: nowrap;
+      }
+
+      .input-group .form-control {
+        border-left: none;
+        border-radius: var(--radius) 0 0 var(--radius);
+      }
+
       /* Responsive Design - تحسينات للتجاوب */
       /* Extra Large Screens */
       @media (min-width: 1440px) {
@@ -1191,6 +1333,23 @@
         .card-view-item {
           display: block;
         }
+
+        .modal-container {
+          width: 95%;
+          max-height: 95vh;
+        }
+
+        .modal-content {
+          padding: var(--space-4);
+        }
+
+        .modal-footer {
+          flex-direction: column;
+        }
+
+        .modal-footer .btn {
+          width: 100%;
+        }
       }
 
       /* Large Mobile Phones */
@@ -1247,6 +1406,41 @@
           width: 32px;
           height: 32px;
           font-size: var(--fs-base);
+        }
+      }
+
+      /* Print Styles */
+      @media print {
+        .sidebar,
+        .mobile-header,
+        .card-view,
+        .btn,
+        .chart-actions {
+          display: none !important;
+        }
+
+        .dashboard {
+          display: block;
+        }
+
+        .main-content {
+          padding: 0;
+          margin: 0;
+          width: 100%;
+        }
+
+        .data-table {
+          display: table;
+          width: 100%;
+          border-collapse: collapse;
+        }
+
+        .table-section,
+        .chart-card {
+          box-shadow: none;
+          border: 1px solid #ccc;
+          page-break-inside: avoid;
+          margin-bottom: 10mm;
         }
       }
     </style>
@@ -1314,6 +1508,12 @@
               >
                 <span class="menu-icon"><i class="fas fa-home"></i></span>
                 <span>لوحة التحكم</span>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="#categories" class="menu-link" data-tab="categories">
+                <span class="menu-icon"><i class="fas fa-tag"></i></span>
+                <span>الفئات</span>
               </a>
             </li>
             <li class="menu-item">
@@ -1792,6 +1992,7 @@
                     <td>3</td>
                     <td>20</td>
                     <td>أسبوع واحد</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td><strong>باب صيانة </strong></td>
@@ -1878,6 +2079,167 @@
           </div>
         </div>
 
+        <!-- Categories Tab -->
+        <div class="tab-content" id="categories-tab">
+          <div class="table-section">
+            <div class="section-header">
+              <h3 class="section-title">
+                <span class="section-title-icon"
+                  ><i class="fas fa-tag"></i
+                ></span>
+                <span>إدارة الفئات</span>
+              </h3>
+              <div class="section-actions">
+                <button class="btn btn-primary">
+                  <i class="fas fa-plus"></i>
+                  <span>إضافة فئة جديدة</span>
+                </button>
+              </div>
+            </div>
+            <div class="section-content">
+              <!-- Table View (Desktop) -->
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>اسم الفئة</th>
+                    <th>الوصف</th>
+                    <th>الفئة الرئيسية</th>
+                    <th>عدد المنتجات</th>
+                    <th>الحالة</th>
+                    <th>الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>أبواب قياسية</strong></td>
+                    <td>جميع الأبواب القياسية</td>
+                    <td>-</td>
+                    <td>12</td>
+                    <td><span class="badge badge-success">نشطة</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>أبواب مقاومة للحريق</strong></td>
+                    <td>جميع الأبواب المقاومة للحريق</td>
+                    <td>-</td>
+                    <td>8</td>
+                    <td><span class="badge badge-success">نشطة</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>أبواب مقاومة للماء</strong></td>
+                    <td>جميع الأبواب المقاومة للماء</td>
+                    <td>-</td>
+                    <td>6</td>
+                    <td><span class="badge badge-success">نشطة</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Card View (Mobile) -->
+              <div class="card-view">
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">اسم الفئة:</div>
+                    <div class="card-view-value">
+                      <strong>أبواب قياسية</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الوصف:</div>
+                    <div class="card-view-value">جميع الأبواب القياسية</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الفئة الرئيسية:</div>
+                    <div class="card-view-value">-</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">عدد المنتجات:</div>
+                    <div class="card-view-value">12</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <span class="badge badge-success">نشطة</span>
+                    </div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-edit"></i>
+                      <span>تعديل</span>
+                    </button>
+                    <button class="btn btn-sm btn-danger">
+                      <i class="fas fa-trash"></i>
+                      <span>حذف</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">اسم الفئة:</div>
+                    <div class="card-view-value">
+                      <strong>أبواب مقاومة للحريق</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الوصف:</div>
+                    <div class="card-view-value">
+                      جميع الأبواب المقاومة للحريق
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الفئة الرئيسية:</div>
+                    <div class="card-view-value">-</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">عدد المنتجات:</div>
+                    <div class="card-view-value">8</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <span class="badge badge-success">نشطة</span>
+                    </div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-edit"></i>
+                      <span>تعديل</span>
+                    </button>
+                    <button class="btn btn-sm btn-danger">
+                      <i class="fas fa-trash"></i>
+                      <span>حذف</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Products Tab -->
         <div class="tab-content" id="products-tab">
           <div class="table-section">
@@ -1910,6 +2272,7 @@
                     <th>السعر الحالي</th>
                     <th>السعر الأصلي</th>
                     <th>الخصم</th>
+                    <th>مدة الضمان</th>
                     <th>المخزون</th>
                     <th>الحالة</th>
                     <th>الإجراءات</th>
@@ -1923,6 +2286,7 @@
                     <td>30 د.ك</td>
                     <td>32 د.ك</td>
                     <td>6%</td>
+                    <td>5 سنوات</td>
                     <td>105</td>
                     <td><span class="badge badge-success">متوفر</span></td>
                     <td>
@@ -1931,6 +2295,12 @@
                       </button>
                       <button class="btn btn-sm btn-danger">
                         <i class="fas fa-trash"></i>
+                      </button>
+                      <button
+                        class="btn btn-sm btn-outline"
+                        title="عرض رسم SVG"
+                      >
+                        <i class="fas fa-image"></i>
                       </button>
                     </td>
                   </tr>
@@ -1941,6 +2311,7 @@
                     <td>45 د.ك</td>
                     <td>48 د.ك</td>
                     <td>6%</td>
+                    <td>5 سنوات</td>
                     <td>87</td>
                     <td><span class="badge badge-success">متوفر</span></td>
                     <td>
@@ -1949,6 +2320,12 @@
                       </button>
                       <button class="btn btn-sm btn-danger">
                         <i class="fas fa-trash"></i>
+                      </button>
+                      <button
+                        class="btn btn-sm btn-outline"
+                        title="عرض رسم SVG"
+                      >
+                        <i class="fas fa-image"></i>
                       </button>
                     </td>
                   </tr>
@@ -1959,6 +2336,7 @@
                     <td>90 د.ك</td>
                     <td>98 د.ك</td>
                     <td>8%</td>
+                    <td>5 سنوات</td>
                     <td>42</td>
                     <td><span class="badge badge-success">متوفر</span></td>
                     <td>
@@ -1967,6 +2345,12 @@
                       </button>
                       <button class="btn btn-sm btn-danger">
                         <i class="fas fa-trash"></i>
+                      </button>
+                      <button
+                        class="btn btn-sm btn-outline"
+                        title="عرض رسم SVG"
+                      >
+                        <i class="fas fa-image"></i>
                       </button>
                     </td>
                   </tr>
@@ -1997,6 +2381,10 @@
                     </div>
                   </div>
                   <div class="card-view-row">
+                    <div class="card-view-label">مدة الضمان:</div>
+                    <div class="card-view-value">5 سنوات</div>
+                  </div>
+                  <div class="card-view-row">
                     <div class="card-view-label">المخزون:</div>
                     <div class="card-view-value">105</div>
                   </div>
@@ -2014,6 +2402,10 @@
                     <button class="btn btn-sm btn-danger">
                       <i class="fas fa-trash"></i>
                       <span>حذف</span>
+                    </button>
+                    <button class="btn btn-sm btn-outline">
+                      <i class="fas fa-image"></i>
+                      <span>عرض SVG</span>
                     </button>
                   </div>
                 </div>
@@ -2040,6 +2432,10 @@
                     </div>
                   </div>
                   <div class="card-view-row">
+                    <div class="card-view-label">مدة الضمان:</div>
+                    <div class="card-view-value">5 سنوات</div>
+                  </div>
+                  <div class="card-view-row">
                     <div class="card-view-label">المخزون:</div>
                     <div class="card-view-value">87</div>
                   </div>
@@ -2057,6 +2453,10 @@
                     <button class="btn btn-sm btn-danger">
                       <i class="fas fa-trash"></i>
                       <span>حذف</span>
+                    </button>
+                    <button class="btn btn-sm btn-outline">
+                      <i class="fas fa-image"></i>
+                      <span>عرض SVG</span>
                     </button>
                   </div>
                 </div>
@@ -2188,7 +2588,7 @@
                   <div class="card-view-row">
                     <div class="card-view-label">الحالة:</div>
                     <div class="card-view-value">
-                      <span class="badge badge-warning">قيد المعالجة</span>
+                      <span class="badge badge-success">تم تنفيذ الطلب</span>
                     </div>
                   </div>
                   <div class="card-view-actions">
@@ -2229,7 +2629,7 @@
                   <div class="card-view-row">
                     <div class="card-view-label">الحالة:</div>
                     <div class="card-view-value">
-                      <span class="badge badge-success">تم تنفيذ الطلب</span>
+                      <span class="badge badge-warning">قيد المعالجة</span>
                     </div>
                   </div>
                   <div class="card-view-actions">
@@ -2307,7 +2707,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><strong>باب صيانة </strong></td>
+                    <td><strong>باب صيانة</strong></td>
                     <td>60×60 سم</td>
                     <td>مقاوم للحريق</td>
                     <td>12</td>
@@ -2379,7 +2779,7 @@
                   <div class="card-view-row">
                     <div class="card-view-label">المنتج:</div>
                     <div class="card-view-value">
-                      <strong>باب صيانة مقاوم للحريق</strong>
+                      <strong>باب صيانة</strong>
                     </div>
                   </div>
                   <div class="card-view-row">
@@ -2423,6 +2823,489 @@
           </div>
         </div>
 
+        <!-- Customers Tab -->
+        <div class="tab-content" id="customers-tab">
+          <div class="table-section">
+            <div class="section-header">
+              <h3 class="section-title">
+                <span class="section-title-icon"
+                  ><i class="fas fa-users"></i
+                ></span>
+                <span>إدارة العملاء</span>
+              </h3>
+              <div class="section-actions">
+                <button class="btn btn-sm btn-outline">
+                  <i class="fas fa-filter"></i>
+                  <span>تصفية</span>
+                </button>
+                <button class="btn btn-primary">
+                  <i class="fas fa-plus"></i>
+                  <span>إضافة عميل جديد</span>
+                </button>
+              </div>
+            </div>
+            <div class="section-content">
+              <!-- Table View (Desktop) -->
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>الاسم</th>
+                    <th>البريد الإلكتروني</th>
+                    <th>رقم الهاتف</th>
+                    <th>عدد الطلبات</th>
+                    <th>إجمالي المشتريات</th>
+                    <th>آخر طلب</th>
+                    <th>الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>أحمد الشمري</strong></td>
+                    <td>ahmed@example.com</td>
+                    <td>+965 9912 4567</td>
+                    <td>5</td>
+                    <td>760 د.ك</td>
+                    <td>14 مارس 2025</td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-sm btn-info">
+                        <i class="fas fa-history"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>عبدالله العجمي</strong></td>
+                    <td>noura@example.com</td>
+                    <td>+965 9834 5678</td>
+                    <td>3</td>
+                    <td>425 د.ك</td>
+                    <td>14 مارس 2025</td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-sm btn-info">
+                        <i class="fas fa-history"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>خالد العتيبي</strong></td>
+                    <td>khaled@example.com</td>
+                    <td>+965 9912 3456</td>
+                    <td>4</td>
+                    <td>650 د.ك</td>
+                    <td>13 مارس 2025</td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-sm btn-info">
+                        <i class="fas fa-history"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Card View (Mobile) -->
+              <div class="card-view">
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">الاسم:</div>
+                    <div class="card-view-value">
+                      <strong>أحمد الشمري</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">البريد الإلكتروني:</div>
+                    <div class="card-view-value">ahmed@example.com</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">رقم الهاتف:</div>
+                    <div class="card-view-value">+965 9912 4567</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">عدد الطلبات:</div>
+                    <div class="card-view-value">5</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">إجمالي المشتريات:</div>
+                    <div class="card-view-value">
+                      <strong>760 د.ك</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">آخر طلب:</div>
+                    <div class="card-view-value">14 مارس 2025</div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-eye"></i>
+                      <span>عرض</span>
+                    </button>
+                    <button class="btn btn-sm btn-info">
+                      <i class="fas fa-history"></i>
+                      <span>السجل</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">الاسم:</div>
+                    <div class="card-view-value">
+                      <strong>عبدالله العجمي</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">البريد الإلكتروني:</div>
+                    <div class="card-view-value">noura@example.com</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">رقم الهاتف:</div>
+                    <div class="card-view-value">+965 9834 5678</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">عدد الطلبات:</div>
+                    <div class="card-view-value">3</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">إجمالي المشتريات:</div>
+                    <div class="card-view-value">
+                      <strong>425 د.ك</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">آخر طلب:</div>
+                    <div class="card-view-value">14 مارس 2025</div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-eye"></i>
+                      <span>عرض</span>
+                    </button>
+                    <button class="btn btn-sm btn-info">
+                      <i class="fas fa-history"></i>
+                      <span>السجل</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users Tab -->
+        <div class="tab-content" id="users-tab">
+          <div class="table-section">
+            <div class="section-header">
+              <h3 class="section-title">
+                <span class="section-title-icon"
+                  ><i class="fas fa-user-shield"></i
+                ></span>
+                <span>إدارة المستخدمين</span>
+              </h3>
+              <div class="section-actions">
+                <button class="btn btn-primary">
+                  <i class="fas fa-plus"></i>
+                  <span>إضافة مستخدم جديد</span>
+                </button>
+              </div>
+            </div>
+            <div class="section-content">
+              <!-- Table View (Desktop) -->
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>الاسم</th>
+                    <th>البريد الإلكتروني</th>
+                    <th>الصلاحية</th>
+                    <th>رقم الهاتف</th>
+                    <th>آخر تسجيل دخول</th>
+                    <th>الحالة</th>
+                    <th>الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>محمد الحربي</strong></td>
+                    <td>mohammed@jureem.com</td>
+                    <td>مدير</td>
+                    <td>+965 9912 0001</td>
+                    <td>14 مارس 2025</td>
+                    <td>
+                      <span class="badge badge-success">نشط</span>
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-user-slash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>أحمد علي</strong></td>
+                    <td>sara@jureem.com</td>
+                    <td>موظف</td>
+                    <td>+965 9912 0002</td>
+                    <td>14 مارس 2025</td>
+                    <td>
+                      <span class="badge badge-success">نشط</span>
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-user-slash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>خالد العنزي</strong></td>
+                    <td>khaled@jureem.com</td>
+                    <td>موظف</td>
+                    <td>+965 9912 0003</td>
+                    <td>13 مارس 2025</td>
+                    <td>
+                      <span class="badge badge-success">نشط</span>
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-user-slash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Card View (Mobile) -->
+              <div class="card-view">
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">الاسم:</div>
+                    <div class="card-view-value">
+                      <strong>محمد الحربي</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">البريد الإلكتروني:</div>
+                    <div class="card-view-value">mohammed@jureem.com</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الصلاحية:</div>
+                    <div class="card-view-value">مدير</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">رقم الهاتف:</div>
+                    <div class="card-view-value">+965 9912 0001</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">آخر تسجيل دخول:</div>
+                    <div class="card-view-value">14 مارس 2025</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <span class="badge badge-success">نشط</span>
+                    </div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-edit"></i>
+                      <span>تعديل</span>
+                    </button>
+                    <button class="btn btn-sm btn-danger">
+                      <i class="fas fa-user-slash"></i>
+                      <span>تعطيل</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-view-item">
+                  <div class="card-view-row">
+                    <div class="card-view-label">الاسم:</div>
+                    <div class="card-view-value">
+                      <strong>أحمد علي</strong>
+                    </div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">البريد الإلكتروني:</div>
+                    <div class="card-view-value">sara@jureem.com</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الصلاحية:</div>
+                    <div class="card-view-value">موظف</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">رقم الهاتف:</div>
+                    <div class="card-view-value">+965 9912 0002</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">آخر تسجيل دخول:</div>
+                    <div class="card-view-value">14 مارس 2025</div>
+                  </div>
+                  <div class="card-view-row">
+                    <div class="card-view-label">الحالة:</div>
+                    <div class="card-view-value">
+                      <span class="badge badge-success">نشط</span>
+                    </div>
+                  </div>
+                  <div class="card-view-actions">
+                    <button class="btn btn-sm btn-primary">
+                      <i class="fas fa-edit"></i>
+                      <span>تعديل</span>
+                    </button>
+                    <button class="btn btn-sm btn-danger">
+                      <i class="fas fa-user-slash"></i>
+                      <span>تعطيل</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reports Tab -->
+        <div class="tab-content" id="reports-tab">
+          <div class="charts-container">
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <span class="chart-title-icon"
+                    ><i class="fas fa-chart-line"></i
+                  ></span>
+                  <span>مبيعات الأشهر الأخيرة</span>
+                </h3>
+                <div class="chart-actions">
+                  <button class="btn btn-sm btn-outline">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>السنة الحالية</span>
+                  </button>
+                  <button class="btn btn-sm btn-outline">
+                    <i class="fas fa-download"></i>
+                    <span>تصدير</span>
+                  </button>
+                </div>
+              </div>
+              <div class="chart-content">
+                <div class="chart-placeholder">
+                  <img
+                    src="/api/placeholder/700/300"
+                    alt="مخطط المبيعات الشهرية"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="charts-container">
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <span class="chart-title-icon"
+                    ><i class="fas fa-chart-pie"></i
+                  ></span>
+                  <span>توزيع المبيعات حسب المنتج</span>
+                </h3>
+                <div class="chart-actions">
+                  <button class="btn btn-sm btn-outline">
+                    <i class="fas fa-download"></i>
+                    <span>تصدير</span>
+                  </button>
+                </div>
+              </div>
+              <div class="chart-content">
+                <div class="chart-placeholder">
+                  <img
+                    src="/api/placeholder/500/300"
+                    alt="مخطط توزيع المبيعات"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <span class="chart-title-icon"
+                    ><i class="fas fa-dollar-sign"></i
+                  ></span>
+                  <span>إجمالي المبيعات</span>
+                </h3>
+                <div class="chart-actions">
+                  <button class="btn btn-sm btn-outline">
+                    <i class="fas fa-filter"></i>
+                    <span>تصفية</span>
+                  </button>
+                </div>
+              </div>
+              <div class="chart-content">
+                <div
+                  class="table-section"
+                  style="box-shadow: none; border: none; margin-bottom: 0"
+                >
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>الشهر</th>
+                        <th>إجمالي المبيعات</th>
+                        <th>عدد الطلبات</th>
+                        <th>متوسط قيمة الطلب</th>
+                        <th>نسبة النمو</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>مارس 2025</strong></td>
+                        <td>21,430 د.ك</td>
+                        <td>178</td>
+                        <td>120.4 د.ك</td>
+                        <td>
+                          <span style="color: var(--success-color)">
+                            <i class="fas fa-arrow-up"></i> 5.3%
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><strong>فبراير 2025</strong></td>
+                        <td>20,350 د.ك</td>
+                        <td>164</td>
+                        <td>124.1 د.ك</td>
+                        <td>
+                          <span style="color: var(--success-color)">
+                            <i class="fas fa-arrow-up"></i> 4.2%
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><strong>يناير 2025</strong></td>
+                        <td>19,520 د.ك</td>
+                        <td>159</td>
+                        <td>122.8 د.ك</td>
+                        <td>
+                          <span style="color: var(--danger-color)">
+                            <i class="fas fa-arrow-down"></i> 2.1%
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Settings Tab -->
         <div class="tab-content" id="settings-tab">
           <div class="table-section">
@@ -2438,743 +3321,97 @@
               <form>
                 <div class="form-grid">
                   <div class="form-group">
-                    <label class="form-label">
-                      <!-- Settings Tab -->
-                      <div class="tab-content" id="settings-tab">
-                        <div class="table-section">
-                          <div class="section-header">
-                            <h3 class="section-title">
-                              <span class="section-title-icon"
-                                ><i class="fas fa-cog"></i
-                              ></span>
-                              <span>إعدادات المتجر</span>
-                            </h3>
-                          </div>
-                          <div
-                            class="section-content"
-                            style="padding: var(--space-6)"
-                          >
-                            <form>
-                              <div class="form-grid">
-                                <div class="form-group">
-                                  <label class="form-label">اسم الشركة</label>
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    value="متجر جوريم"
-                                  />
-                                </div>
-
-                                <div class="form-group">
-                                  <label class="form-label"
-                                    >البريد الإلكتروني</label
-                                  >
-                                  <input
-                                    type="email"
-                                    class="form-control"
-                                    value="info@jureem.com"
-                                  />
-                                </div>
-
-                                <div class="form-group">
-                                  <label class="form-label">رقم الهاتف</label>
-                                  <input
-                                    type="tel"
-                                    class="form-control"
-                                    value="+965 2291 0000"
-                                    dir="ltr"
-                                  />
-                                </div>
-
-                                <div class="form-group">
-                                  <label class="form-label">العنوان</label>
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    value="الكويت - حولي - شارع تونس"
-                                  />
-                                </div>
-
-                                <div class="form-group">
-                                  <label class="form-label">عملة المتجر</label>
-                                  <select class="form-control">
-                                    <option selected>دينار كويتي (KWD)</option>
-                                    <option>ريال سعودي (SAR)</option>
-                                    <option>دولار أمريكي (USD)</option>
-                                  </select>
-                                </div>
-
-                                <div class="form-group">
-                                  <label class="form-label"
-                                    >تنبيه المخزون المنخفض (أقل من)</label
-                                  >
-                                  <input
-                                    type="number"
-                                    class="form-control"
-                                    value="20"
-                                    min="1"
-                                  />
-                                </div>
-
-                                <div class="form-group">
-                                  <label class="form-label"
-                                    >مدة الضمان الافتراضية</label
-                                  >
-                                  <select class="form-control">
-                                    <option>سنة واحدة</option>
-                                    <option>سنتان</option>
-                                    <option>3 سنوات</option>
-                                    <option selected>5 سنوات</option>
-                                  </select>
-                                </div>
-
-                                <div class="form-group">
-                                  <label class="form-label">رسوم التوصيل</label>
-                                  <div class="input-group">
-                                    <input
-                                      type="number"
-                                      class="form-control"
-                                      value="5"
-                                      min="0"
-                                      step="0.5"
-                                    />
-                                    <span class="input-group-text">د.ك</span>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="form-actions">
-                                <button type="submit" class="btn btn-success">
-                                  <i class="fas fa-save"></i>
-                                  <span>حفظ الإعدادات</span>
-                                </button>
-                                <button type="reset" class="btn btn-outline">
-                                  <i class="fas fa-undo"></i>
-                                  <span>إعادة تعيين</span>
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Users Tab -->
-                      <div class="tab-content" id="users-tab">
-                        <div class="table-section">
-                          <div class="section-header">
-                            <h3 class="section-title">
-                              <span class="section-title-icon"
-                                ><i class="fas fa-user-shield"></i
-                              ></span>
-                              <span>إدارة المستخدمين</span>
-                            </h3>
-                            <div class="section-actions">
-                              <button class="btn btn-primary">
-                                <i class="fas fa-plus"></i>
-                                <span>إضافة مستخدم جديد</span>
-                              </button>
-                            </div>
-                          </div>
-                          <div class="section-content">
-                            <!-- Table View (Desktop) -->
-                            <table class="data-table">
-                              <thead>
-                                <tr>
-                                  <th>الاسم</th>
-                                  <th>البريد الإلكتروني</th>
-                                  <th>الصلاحية</th>
-                                  <th>رقم الهاتف</th>
-                                  <th>آخر تسجيل دخول</th>
-                                  <th>الحالة</th>
-                                  <th>الإجراءات</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td><strong>محمد الحربي</strong></td>
-                                  <td>mohammed@jureem.com</td>
-                                  <td>مدير</td>
-                                  <td>+965 9912 0001</td>
-                                  <td>14 مارس 2025</td>
-                                  <td>
-                                    <span class="badge badge-success">نشط</span>
-                                  </td>
-                                  <td>
-                                    <button class="btn btn-sm btn-primary">
-                                      <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                      <i class="fas fa-user-slash"></i>
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td><strong>سارة علي</strong></td>
-                                  <td>sara@jureem.com</td>
-                                  <td>موظف</td>
-                                  <td>+965 9912 0002</td>
-                                  <td>14 مارس 2025</td>
-                                  <td>
-                                    <span class="badge badge-success">نشط</span>
-                                  </td>
-                                  <td>
-                                    <button class="btn btn-sm btn-primary">
-                                      <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                      <i class="fas fa-user-slash"></i>
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td><strong>خالد العنزي</strong></td>
-                                  <td>khaled@jureem.com</td>
-                                  <td>موظف</td>
-                                  <td>+965 9912 0003</td>
-                                  <td>13 مارس 2025</td>
-                                  <td>
-                                    <span class="badge badge-success">نشط</span>
-                                  </td>
-                                  <td>
-                                    <button class="btn btn-sm btn-primary">
-                                      <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                      <i class="fas fa-user-slash"></i>
-                                    </button>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-
-                            <!-- Card View (Mobile) -->
-                            <div class="card-view">
-                              <div class="card-view-item">
-                                <div class="card-view-row">
-                                  <div class="card-view-label">الاسم:</div>
-                                  <div class="card-view-value">
-                                    <strong>محمد الحربي</strong>
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">
-                                    البريد الإلكتروني:
-                                  </div>
-                                  <div class="card-view-value">
-                                    mohammed@jureem.com
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">الصلاحية:</div>
-                                  <div class="card-view-value">مدير</div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">رقم الهاتف:</div>
-                                  <div class="card-view-value">
-                                    +965 9912 0001
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">
-                                    آخر تسجيل دخول:
-                                  </div>
-                                  <div class="card-view-value">
-                                    14 مارس 2025
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">الحالة:</div>
-                                  <div class="card-view-value">
-                                    <span class="badge badge-success">نشط</span>
-                                  </div>
-                                </div>
-                                <div class="card-view-actions">
-                                  <button class="btn btn-sm btn-primary">
-                                    <i class="fas fa-edit"></i>
-                                    <span>تعديل</span>
-                                  </button>
-                                  <button class="btn btn-sm btn-danger">
-                                    <i class="fas fa-user-slash"></i>
-                                    <span>تعطيل</span>
-                                  </button>
-                                </div>
-                              </div>
-
-                              <div class="card-view-item">
-                                <div class="card-view-row">
-                                  <div class="card-view-label">الاسم:</div>
-                                  <div class="card-view-value">
-                                    <strong>سارة علي</strong>
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">
-                                    البريد الإلكتروني:
-                                  </div>
-                                  <div class="card-view-value">
-                                    sara@jureem.com
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">الصلاحية:</div>
-                                  <div class="card-view-value">موظف</div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">رقم الهاتف:</div>
-                                  <div class="card-view-value">
-                                    +965 9912 0002
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">
-                                    آخر تسجيل دخول:
-                                  </div>
-                                  <div class="card-view-value">
-                                    14 مارس 2025
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">الحالة:</div>
-                                  <div class="card-view-value">
-                                    <span class="badge badge-success">نشط</span>
-                                  </div>
-                                </div>
-                                <div class="card-view-actions">
-                                  <button class="btn btn-sm btn-primary">
-                                    <i class="fas fa-edit"></i>
-                                    <span>تعديل</span>
-                                  </button>
-                                  <button class="btn btn-sm btn-danger">
-                                    <i class="fas fa-user-slash"></i>
-                                    <span>تعطيل</span>
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Customers Tab -->
-                      <div class="tab-content" id="customers-tab">
-                        <div class="table-section">
-                          <div class="section-header">
-                            <h3 class="section-title">
-                              <span class="section-title-icon"
-                                ><i class="fas fa-users"></i
-                              ></span>
-                              <span>إدارة العملاء</span>
-                            </h3>
-                            <div class="section-actions">
-                              <button class="btn btn-sm btn-outline">
-                                <i class="fas fa-filter"></i>
-                                <span>تصفية</span>
-                              </button>
-                              <button class="btn btn-primary">
-                                <i class="fas fa-plus"></i>
-                                <span>إضافة عميل جديد</span>
-                              </button>
-                            </div>
-                          </div>
-                          <div class="section-content">
-                            <!-- Table View (Desktop) -->
-                            <table class="data-table">
-                              <thead>
-                                <tr>
-                                  <th>الاسم</th>
-                                  <th>البريد الإلكتروني</th>
-                                  <th>رقم الهاتف</th>
-                                  <th>عدد الطلبات</th>
-                                  <th>إجمالي المشتريات</th>
-                                  <th>آخر طلب</th>
-                                  <th>الإجراءات</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td><strong>أحمد الشمري</strong></td>
-                                  <td>ahmed@example.com</td>
-                                  <td>+965 9912 4567</td>
-                                  <td>5</td>
-                                  <td>760 د.ك</td>
-                                  <td>14 مارس 2025</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-primary">
-                                      <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-info">
-                                      <i class="fas fa-history"></i>
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td><strong>نورة العجمي</strong></td>
-                                  <td>noura@example.com</td>
-                                  <td>+965 9834 5678</td>
-                                  <td>3</td>
-                                  <td>425 د.ك</td>
-                                  <td>14 مارس 2025</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-primary">
-                                      <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-info">
-                                      <i class="fas fa-history"></i>
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td><strong>خالد العتيبي</strong></td>
-                                  <td>khaled@example.com</td>
-                                  <td>+965 9912 3456</td>
-                                  <td>4</td>
-                                  <td>650 د.ك</td>
-                                  <td>13 مارس 2025</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-primary">
-                                      <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-info">
-                                      <i class="fas fa-history"></i>
-                                    </button>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-
-                            <!-- Card View (Mobile) -->
-                            <div class="card-view">
-                              <div class="card-view-item">
-                                <div class="card-view-row">
-                                  <div class="card-view-label">الاسم:</div>
-                                  <div class="card-view-value">
-                                    <strong>أحمد الشمري</strong>
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">
-                                    البريد الإلكتروني:
-                                  </div>
-                                  <div class="card-view-value">
-                                    ahmed@example.com
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">رقم الهاتف:</div>
-                                  <div class="card-view-value">
-                                    +965 9912 4567
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">
-                                    عدد الطلبات:
-                                  </div>
-                                  <div class="card-view-value">5</div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">
-                                    إجمالي المشتريات:
-                                  </div>
-                                  <div class="card-view-value">
-                                    <strong>760 د.ك</strong>
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">آخر طلب:</div>
-                                  <div class="card-view-value">
-                                    14 مارس 2025
-                                  </div>
-                                </div>
-                                <div class="card-view-actions">
-                                  <button class="btn btn-sm btn-primary">
-                                    <i class="fas fa-eye"></i>
-                                    <span>عرض</span>
-                                  </button>
-                                  <button class="btn btn-sm btn-info">
-                                    <i class="fas fa-history"></i>
-                                    <span>السجل</span>
-                                  </button>
-                                </div>
-                              </div>
-
-                              <div class="card-view-item">
-                                <div class="card-view-row">
-                                  <div class="card-view-label">الاسم:</div>
-                                  <div class="card-view-value">
-                                    <strong>نورة العجمي</strong>
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">
-                                    البريد الإلكتروني:
-                                  </div>
-                                  <div class="card-view-value">
-                                    noura@example.com
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">رقم الهاتف:</div>
-                                  <div class="card-view-value">
-                                    +965 9834 5678
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">
-                                    عدد الطلبات:
-                                  </div>
-                                  <div class="card-view-value">3</div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">
-                                    إجمالي المشتريات:
-                                  </div>
-                                  <div class="card-view-value">
-                                    <strong>425 د.ك</strong>
-                                  </div>
-                                </div>
-                                <div class="card-view-row">
-                                  <div class="card-view-label">آخر طلب:</div>
-                                  <div class="card-view-value">
-                                    14 مارس 2025
-                                  </div>
-                                </div>
-                                <div class="card-view-actions">
-                                  <button class="btn btn-sm btn-primary">
-                                    <i class="fas fa-eye"></i>
-                                    <span>عرض</span>
-                                  </button>
-                                  <button class="btn btn-sm btn-info">
-                                    <i class="fas fa-history"></i>
-                                    <span>السجل</span>
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Reports Tab -->
-                      <div class="tab-content" id="reports-tab">
-                        <div class="charts-container">
-                          <div class="chart-card">
-                            <div class="chart-header">
-                              <h3 class="chart-title">
-                                <span class="chart-title-icon"
-                                  ><i class="fas fa-chart-line"></i
-                                ></span>
-                                <span>مبيعات الأشهر الأخيرة</span>
-                              </h3>
-                              <div class="chart-actions">
-                                <button class="btn btn-sm btn-outline">
-                                  <i class="fas fa-calendar-alt"></i>
-                                  <span>السنة الحالية</span>
-                                </button>
-                                <button class="btn btn-sm btn-outline">
-                                  <i class="fas fa-download"></i>
-                                  <span>تصدير</span>
-                                </button>
-                              </div>
-                            </div>
-                            <div class="chart-content">
-                              <div class="chart-placeholder">
-                                <img
-                                  src="/api/placeholder/700/300"
-                                  alt="مخطط المبيعات الشهرية"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="charts-container">
-                          <div class="chart-card">
-                            <div class="chart-header">
-                              <h3 class="chart-title">
-                                <span class="chart-title-icon"
-                                  ><i class="fas fa-chart-pie"></i
-                                ></span>
-                                <span>توزيع المبيعات حسب المنتج</span>
-                              </h3>
-                              <div class="chart-actions">
-                                <button class="btn btn-sm btn-outline">
-                                  <i class="fas fa-download"></i>
-                                  <span>تصدير</span>
-                                </button>
-                              </div>
-                            </div>
-                            <div class="chart-content">
-                              <div class="chart-placeholder">
-                                <img
-                                  src="/api/placeholder/500/300"
-                                  alt="مخطط توزيع المبيعات"
-                                />
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="chart-card">
-                            <div class="chart-header">
-                              <h3 class="chart-title">
-                                <span class="chart-title-icon"
-                                  ><i class="fas fa-dollar-sign"></i
-                                ></span>
-                                <span>إجمالي المبيعات</span>
-                              </h3>
-                              <div class="chart-actions">
-                                <button class="btn btn-sm btn-outline">
-                                  <i class="fas fa-filter"></i>
-                                  <span>تصفية</span>
-                                </button>
-                              </div>
-                            </div>
-                            <div class="chart-content">
-                              <div
-                                class="table-section"
-                                style="
-                                  box-shadow: none;
-                                  border: none;
-                                  margin-bottom: 0;
-                                "
-                              >
-                                <table class="data-table">
-                                  <thead>
-                                    <tr>
-                                      <th>الشهر</th>
-                                      <th>إجمالي المبيعات</th>
-                                      <th>عدد الطلبات</th>
-                                      <th>متوسط قيمة الطلب</th>
-                                      <th>نسبة النمو</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td><strong>مارس 2025</strong></td>
-                                      <td>21,430 د.ك</td>
-                                      <td>178</td>
-                                      <td>120.4 د.ك</td>
-                                      <td>
-                                        <span
-                                          style="color: var(--success-color)"
-                                        >
-                                          <i class="fas fa-arrow-up"></i> 5.3%
-                                        </span>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td><strong>فبراير 2025</strong></td>
-                                      <td>20,350 د.ك</td>
-                                      <td>164</td>
-                                      <td>124.1 د.ك</td>
-                                      <td>
-                                        <span
-                                          style="color: var(--success-color)"
-                                        >
-                                          <i class="fas fa-arrow-up"></i> 4.2%
-                                        </span>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td><strong>يناير 2025</strong></td>
-                                      <td>19,520 د.ك</td>
-                                      <td>159</td>
-                                      <td>122.8 د.ك</td>
-                                      <td>
-                                        <span
-                                          style="color: var(--danger-color)"
-                                        >
-                                          <i class="fas fa-arrow-down"></i> 2.1%
-                                        </span>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <style>
-                        /* Additional Styles for Input Groups */
-                        .input-group {
-                          position: relative;
-                          display: flex;
-                          width: 100%;
-                        }
-
-                        .input-group-text {
-                          display: flex;
-                          align-items: center;
-                          padding: var(--space-3) var(--space-4);
-                          font-size: var(--fs-base);
-                          color: var(--text-color);
-                          text-align: center;
-                          background-color: var(--bg-dark);
-                          border: 1px solid var(--border-color);
-                          border-right: none;
-                          border-radius: 0 var(--radius) var(--radius) 0;
-                          white-space: nowrap;
-                        }
-
-                        .input-group .form-control {
-                          border-left: none;
-                          border-radius: var(--radius) 0 0 var(--radius);
-                        }
-
-                        /* Responsive Settings Form */
-                        @media (max-width: 768px) {
-                          .form-actions {
-                            flex-direction: column;
-                            gap: var(--space-3);
-                          }
-
-                          .form-actions .btn {
-                            width: 100%;
-                          }
-
-                          .form-grid {
-                            grid-template-columns: 1fr;
-                          }
-                        }
-
-                        /* Print Styles */
-                        @media print {
-                          .sidebar,
-                          .mobile-header,
-                          .card-view,
-                          .btn,
-                          .chart-actions {
-                            display: none !important;
-                          }
-
-                          .dashboard {
-                            display: block;
-                          }
-
-                          .main-content {
-                            padding: 0;
-                            margin: 0;
-                            width: 100%;
-                          }
-
-                          .data-table {
-                            display: table;
-                            width: 100%;
-                            border-collapse: collapse;
-                          }
-
-                          .table-section,
-                          .chart-card {
-                            box-shadow: none;
-                            border: 1px solid #ccc;
-                            page-break-inside: avoid;
-                            margin-bottom: 10mm;
-                          }
-                        }
-                      </style></label
-                    >
+                    <label class="form-label">اسم الشركة</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      value="متجر جوريم"
+                    />
                   </div>
+
+                  <div class="form-group">
+                    <label class="form-label">البريد الإلكتروني</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      value="info@jureem.com"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">رقم الهاتف</label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      value="+965 2291 0000"
+                      dir="ltr"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">العنوان</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      value="الكويت - حولي - شارع تونس"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">عملة المتجر</label>
+                    <select class="form-control">
+                      <option selected>دينار كويتي (KWD)</option>
+                      <option>ريال سعودي (SAR)</option>
+                      <option>دولار أمريكي (USD)</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label"
+                      >تنبيه المخزون المنخفض (أقل من)</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      value="20"
+                      min="1"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">مدة الضمان الافتراضية</label>
+                    <select class="form-control">
+                      <option>سنة واحدة</option>
+                      <option>سنتان</option>
+                      <option>3 سنوات</option>
+                      <option selected>5 سنوات</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">رسوم التوصيل</label>
+                    <div class="input-group">
+                      <input
+                        type="number"
+                        class="form-control"
+                        value="5"
+                        min="0"
+                        step="0.5"
+                      />
+                      <span class="input-group-text">د.ك</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i>
+                    <span>حفظ الإعدادات</span>
+                  </button>
+                  <button type="reset" class="btn btn-outline">
+                    <i class="fas fa-undo"></i>
+                    <span>إعادة تعيين</span>
+                  </button>
                 </div>
               </form>
             </div>
@@ -3182,7 +3419,153 @@
         </div>
       </main>
     </div>
-    <!-- Add JavaScript for tab switching -->
+
+    <!-- Modal de Detalles del Pedido -->
+    <div id="orderDetailsModal" class="modal" style="display: none">
+      <div class="modal-overlay" onclick="closeOrderModal()"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3 class="modal-title">
+            <span><i class="fas fa-shopping-cart"></i></span>
+            <span>تفاصيل الطلب #ORD-1028</span>
+          </h3>
+          <button class="modal-close" onclick="closeOrderModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-content">
+          <div class="order-details-section">
+            <h4>معلومات العميل</h4>
+            <div class="details-grid">
+              <div class="details-item">
+                <label>الاسم:</label>
+                <div>أحمد الشمري</div>
+              </div>
+              <div class="details-item">
+                <label>البريد الإلكتروني:</label>
+                <div>ahmed@example.com</div>
+              </div>
+              <div class="details-item">
+                <label>رقم الهاتف:</label>
+                <div>+965 9912 4567</div>
+              </div>
+              <div class="details-item">
+                <label>العنوان:</label>
+                <div>الكويت - حولي - شارع التعاون - منزل 42</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-details-section">
+            <h4>عناصر الطلب</h4>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>المنتج</th>
+                  <th>المقاس</th>
+                  <th>الكمية</th>
+                  <th>سعر الوحدة</th>
+                  <th>المجموع</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>باب صيانة مقاوم للحريق</strong></td>
+                  <td>60×60 سم</td>
+                  <td>2</td>
+                  <td>90 د.ك</td>
+                  <td>180 د.ك</td>
+                </tr>
+                <tr>
+                  <td><strong>باب صيانة مقاوم للماء</strong></td>
+                  <td>60×60 سم</td>
+                  <td>1</td>
+                  <td>110 د.ك</td>
+                  <td>110 د.ك</td>
+                </tr>
+                <tr>
+                  <td><strong>باب صيانة</strong></td>
+                  <td>20×20 سم</td>
+                  <td>1</td>
+                  <td>30 د.ك</td>
+                  <td>30 د.ك</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4" style="text-align: left">
+                    <strong>المجموع الفرعي:</strong>
+                  </td>
+                  <td>320 د.ك</td>
+                </tr>
+                <tr>
+                  <td colspan="4" style="text-align: left">
+                    <strong>الشحن:</strong>
+                  </td>
+                  <td>5 د.ك</td>
+                </tr>
+                <tr>
+                  <td colspan="4" style="text-align: left">
+                    <strong>الخصم:</strong>
+                  </td>
+                  <td>-15 د.ك</td>
+                </tr>
+                <tr>
+                  <td colspan="4" style="text-align: left">
+                    <strong>المجموع النهائي:</strong>
+                  </td>
+                  <td><strong>310 د.ك</strong></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <div class="order-details-section">
+            <h4>معلومات الطلب</h4>
+            <div class="details-grid">
+              <div class="details-item">
+                <label>رقم الطلب:</label>
+                <div>#ORD-1028</div>
+              </div>
+              <div class="details-item">
+                <label>تاريخ الطلب:</label>
+                <div>14 مارس 2025</div>
+              </div>
+              <div class="details-item">
+                <label>طريقة الدفع:</label>
+                <div>بطاقة ائتمان</div>
+              </div>
+              <div class="details-item">
+                <label>الحالة:</label>
+                <div>
+                  <span class="badge badge-success">تم تنفيذ الطلب</span>
+                </div>
+              </div>
+              <div class="details-item">
+                <label>ملاحظات:</label>
+                <div>توصيل مع الإرشادات - عدم ترك المنتج بدون استلام</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary">
+            <i class="fas fa-print"></i>
+            <span>طباعة الفاتورة</span>
+          </button>
+          <button class="btn btn-success">
+            <i class="fas fa-check"></i>
+            <span>تحديث الحالة</span>
+          </button>
+          <button class="btn btn-outline" onclick="closeOrderModal()">
+            <i class="fas fa-times"></i>
+            <span>إغلاق</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Referencias a elementos del DOM
@@ -3203,6 +3586,7 @@
           users: "fas fa-user-shield",
           reports: "fas fa-chart-line",
           settings: "fas fa-cog",
+          categories: "fas fa-tag", // Añadido para la nueva página
         };
 
         // Función para mostrar/ocultar el sidebar
@@ -3298,6 +3682,25 @@
             pageTransition.classList.remove("active");
           }, 800);
         }
+
+        // Funciones para el modal de detalles de pedido
+        window.showOrderModal = function () {
+          document.getElementById("orderDetailsModal").style.display = "flex";
+          document.body.style.overflow = "hidden";
+        };
+
+        window.closeOrderModal = function () {
+          document.getElementById("orderDetailsModal").style.display = "none";
+          document.body.style.overflow = "auto";
+        };
+
+        // Asignar eventos a los botones de detalles de pedido
+        const orderViewButtons = document.querySelectorAll(
+          ".btn-primary i.fas.fa-eye"
+        );
+        orderViewButtons.forEach((button) => {
+          button.parentElement.addEventListener("click", showOrderModal);
+        });
       });
     </script>
   </body>
